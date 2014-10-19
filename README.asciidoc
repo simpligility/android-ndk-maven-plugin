@@ -6,9 +6,9 @@ the http://tools.android.com[Android NDK].
 === Links
 
 * https://github.com/simpligility/android-ndk-maven-plugin[Project site] 
-* https://github.com/simpligility/android-ndk-maven-plugin/Issues[Issue tracker]
+* https://github.com/simpligility/android-ndk-maven-plugin/issues[Issue tracker]
 * https://groups.google.com/forum/?fromgroups#!forum/maven-android-developers[Mailinglist]
-* http://code.google.com/p/maven-android-plugin/wiki/Changelog[Changelog]
+* https://github.com/simpligility/android-ndk-maven-plugin/blob/master/src/site/asciidoc/changelog.adoc[Changelog]
 * image:https://travis-ci.org/simpligility/android-ndk-maven-plugin.png["Build Status", link="https://travis-ci.org/simpligility/android-ndk-maven-plugin"]
 
 === Contributions
