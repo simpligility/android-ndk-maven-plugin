@@ -1,0 +1,3 @@
+= Releasing 
+
+how to release to central via ossrh

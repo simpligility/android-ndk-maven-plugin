@@ -1,0 +1,7 @@
+= Changelog
+
+== 0.1.0
+
+* initial project setup, pom and further config
+** contributed by Manfred Moser http://simpligility.com
+
