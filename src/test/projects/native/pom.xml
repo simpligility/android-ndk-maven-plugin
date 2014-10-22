@@ -25,6 +25,8 @@
     <module>java-with-native-statically-linked-dependency</module>
     <module>java-with-native-dependency-x86-only</module>
 
+    <module>mixed-java-native-code</module>
+
     <!--
         <module>java-transient-dependency</module>
     -->
