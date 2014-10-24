@@ -2,6 +2,8 @@
 
 == 0.1.0
 
+* Initial drop
+** contributed by Johan Lindquist
 * initial project setup, pom and further config
 ** contributed by Manfred Moser http://simpligility.com
 
