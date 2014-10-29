@@ -51,7 +51,7 @@
   <scm>
     <url>https://github.com/simpligility/android-ndk-maven-plugin/tree/${scm.branch}</url>
     <connection>scm:git:git://github.com/simpligility/android-ndk-maven-plugin.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/simpligility/android--nk-maven-plugin.git</developerConnection>
+    <developerConnection>scm:git:ssh://git@github.com/simpligility/android-ndk-maven-plugin.git</developerConnection>
     <tag>0.1.0</tag>
   </scm>
 
