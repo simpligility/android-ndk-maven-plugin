@@ -98,6 +98,7 @@
   </prerequisites>
 
   <dependencies>
+  
     <dependency>
       <groupId>com.android.tools</groupId>
       <artifactId>common</artifactId>
@@ -153,7 +154,13 @@
       <artifactId>lint-checks</artifactId>
       <version>${android.tools.version}</version>
     </dependency>
-
+    <!-- workaround to avoid site and animalsniffer failure due to invalid 
+      old icu4j class file -->
+    <dependency>
+      <groupId>com.ibm.icu</groupId>
+      <artifactId>icu4j</artifactId>
+      <version>3.4.4</version>
+    </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-artifact</artifactId>
@@ -503,6 +510,23 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <!-- deploy the site to github pages -->
+        <groupId>com.github.github</groupId>
+        <artifactId>site-maven-plugin</artifactId>
+        <configuration>
+          <server>github</server> <!-- the id of the server with the passwords in settings.xml -->
+          <message>Creating site for ${project.version}</message>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>site</phase>
+            <goals>
+              <goal>site</goal> <!-- the site goal uploads to ghpages -->
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
@@ -600,23 +624,6 @@
       <id>official-release</id>
       <build>
         <plugins>
-          <plugin>
-            <!-- deploy the site to github pages -->
-            <groupId>com.github.github</groupId>
-            <artifactId>site-maven-plugin</artifactId>
-            <configuration>
-              <server>github</server> <!-- the id of the server with the passwords in settings.xml -->
-              <message>Creating site for ${project.version}</message>
-            </configuration>
-            <executions>
-              <execution>
-                <phase>site</phase>
-                <goals>
-                  <goal>site</goal> <!-- the site goal uploads to ghpages -->
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
           <!-- We want to sign the artifact, the POM, and all attached artifacts -->
           <plugin>
             <artifactId>maven-gpg-plugin</artifactId>
