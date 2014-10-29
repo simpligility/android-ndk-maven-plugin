@@ -2,8 +2,8 @@
 
 == 0.1.0
 
-* Initial drop
+* Initial port of NDK features from Android Maven plugin including config adaptations and improvements
 ** contributed by Johan Lindquist
-* initial project setup, pom and further config
+* initial project setup, pom and further config for release, deployment and more
 ** contributed by Manfred Moser http://simpligility.com
 
