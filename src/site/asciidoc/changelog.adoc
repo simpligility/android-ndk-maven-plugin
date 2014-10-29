@@ -1,6 +1,7 @@
 = Changelog
 
-== 0.1.0
+
+== 0.1.0 - released 2014-10-28
 
 * Initial port of NDK features from Android Maven plugin including config adaptations and improvements
 ** contributed by Johan Lindquist
