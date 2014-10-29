@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+<rss version="0.91">
+  <channel>
+    <title>Android NDK Maven Plugin - android-ndk-maven-plugin - Checkstyle report</title>
+    <link>https://github.com/simpligility/android-ndk-maven-plugin</link>
+    <description>Android NDK Maven Plugin - android-ndk-maven-plugin - Checkstyle report</description>
+    <language>en-us</language>
+    <copyright>&#169;2014 simpligility technologies inc.</copyright>
+    <item>
+      <title>File: 21,
+             Errors: 2973,
+             Warnings: 0,
+             Infos: 0
+      </title>
+            <link>https://github.com/simpligility/android-ndk-maven-plugin/checkstyle.html</link>
+      <description>
+        <p>Click <a href="https://github.com/simpligility/android-ndk-maven-plugin/checkstyle.html">here</a> for the full Checkstyle report.</p>
+
+        <table summary="Files" boder="1">
+          <thead>
+            <tr>
+              <th>Files</th>
+              <th style="width:30px;"><abbr title="Info">I</abbr></th>
+              <th style="width:30px;"><abbr title="Warning">W</abbr></th>
+              <th style="width:30px;"><abbr title="Error">E</abbr></th>
+            </tr>
+          </thead>
+          <tbody>
+                          <tr>
+                <td>
+                  <a href="https://github.com/simpligility/android-ndk-maven-plugin/checkstyle.html#com.simpligility.maven.plugins.androidndk.phase00clean.NdkCleanMojo.java">com/simpligility/maven/plugins/androidndk/phase00clean/NdkCleanMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  58
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/simpligility/android-ndk-maven-plugin/checkstyle.html#com.simpligility.maven.plugins.androidndk.AndroidNdk.java">com/simpligility/maven/plugins/androidndk/AndroidNdk.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  221
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/simpligility/android-ndk-maven-plugin/checkstyle.html#com.simpligility.maven.plugins.androidndk.common.MavenToPlexusLogAdapter.java">com/simpligility/maven/plugins/androidndk/common/MavenToPlexusLogAdapter.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  99
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/simpligility/android-ndk-maven-plugin/checkstyle.html#com.simpligility.maven.plugins.androidndk.common.NativeHelper.java">com/simpligility/maven/plugins/androidndk/common/NativeHelper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  363
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/simpligility/android-ndk-maven-plugin/checkstyle.html#com.simpligility.maven.plugins.androidndk.InvalidConfigurationException.java">com/simpligility/maven/plugins/androidndk/InvalidConfigurationException.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  8
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/simpligility/android-ndk-maven-plugin/checkstyle.html#com.simpligility.maven.plugins.androidndk.PluginInfo.java">com/simpligility/maven/plugins/androidndk/PluginInfo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  78
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/simpligility/android-ndk-maven-plugin/checkstyle.html#com.simpligility.maven.plugins.androidndk.common.AndroidExtension.java">com/simpligility/maven/plugins/androidndk/common/AndroidExtension.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  21
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/simpligility/android-ndk-maven-plugin/checkstyle.html#com.simpligility.maven.plugins.androidndk.common.JarHelper.java">com/simpligility/maven/plugins/androidndk/common/JarHelper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  61
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/simpligility/android-ndk-maven-plugin/checkstyle.html#com.simpligility.maven.plugins.androidndk.configuration.HeaderFilesDirective.java">com/simpligility/maven/plugins/androidndk/configuration/HeaderFilesDirective.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  34
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/simpligility/android-ndk-maven-plugin/checkstyle.html#com.simpligility.maven.plugins.androidndk.common.Const.java">com/simpligility/maven/plugins/androidndk/common/Const.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  6
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/simpligility/android-ndk-maven-plugin/checkstyle.html#com.simpligility.maven.plugins.androidndk.common.DependencyCollector.java">com/simpligility/maven/plugins/androidndk/common/DependencyCollector.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  80
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/simpligility/android-ndk-maven-plugin/checkstyle.html#com.simpligility.maven.plugins.androidndk.plugin.properties">com/simpligility/maven/plugins/androidndk/plugin.properties</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/simpligility/android-ndk-maven-plugin/checkstyle.html#com.simpligility.maven.plugins.androidndk.common.LogSyncProgressMonitor.java">com/simpligility/maven/plugins/androidndk/common/LogSyncProgressMonitor.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  42
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/simpligility/android-ndk-maven-plugin/checkstyle.html#com.simpligility.maven.plugins.androidndk.phase05compile.MakefileHelper.java">com/simpligility/maven/plugins/androidndk/phase05compile/MakefileHelper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  421
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/simpligility/android-ndk-maven-plugin/checkstyle.html#com.simpligility.maven.plugins.androidndk.CommandExecutor.java">com/simpligility/maven/plugins/androidndk/CommandExecutor.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  310
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/simpligility/android-ndk-maven-plugin/checkstyle.html#com.simpligility.maven.plugins.androidndk.phase05compile.NdkBuildMojo.java">com/simpligility/maven/plugins/androidndk/phase05compile/NdkBuildMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  921
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/simpligility/android-ndk-maven-plugin/checkstyle.html#com.simpligility.maven.plugins.androidndk.configuration.ArchitectureToolchainMappings.java">com/simpligility/maven/plugins/androidndk/configuration/ArchitectureToolchainMappings.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  34
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/simpligility/android-ndk-maven-plugin/checkstyle.html#com.simpligility.maven.plugins.androidndk.common.ArtifactResolverHelper.java">com/simpligility/maven/plugins/androidndk/common/ArtifactResolverHelper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  136
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/simpligility/android-ndk-maven-plugin/checkstyle.html#com.simpligility.maven.plugins.androidndk.configuration.AdditionallyBuiltModule.java">com/simpligility/maven/plugins/androidndk/configuration/AdditionallyBuiltModule.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  46
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/simpligility/android-ndk-maven-plugin/checkstyle.html#com.simpligility.maven.plugins.androidndk.ExecutionException.java">com/simpligility/maven/plugins/androidndk/ExecutionException.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  26
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/simpligility/android-ndk-maven-plugin/checkstyle.html#com.simpligility.maven.plugins.androidndk.InvalidNdkException.java">com/simpligility/maven/plugins/androidndk/InvalidNdkException.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  8
+                </td>
+              </tr>
+                      </tbody>
+        </table>
+        
+      </description>
+    </item>
+  </channel>
+</rss>
+

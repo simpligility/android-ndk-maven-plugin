@@ -1,0 +1,4 @@
+com.simpligility.maven.plugins.androidndk
+com.simpligility.maven.plugins.androidndk.common
+com.simpligility.maven.plugins.androidndk.projects
+com.simpligility.maven.plugins.androidndk.standalonemojos

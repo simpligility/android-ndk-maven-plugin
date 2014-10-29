@@ -1,0 +1,5 @@
+com.simpligility.maven.plugins.androidndk
+com.simpligility.maven.plugins.androidndk.common
+com.simpligility.maven.plugins.androidndk.configuration
+com.simpligility.maven.plugins.androidndk.phase00clean
+com.simpligility.maven.plugins.androidndk.phase05compile
