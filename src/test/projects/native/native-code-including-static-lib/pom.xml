@@ -30,6 +30,13 @@
       <groupId>com.simpligility.maven.plugins.samples</groupId>
       <artifactId>native-static-lib</artifactId>
       <version>1.0.0-SNAPSHOT</version>
+      <classifier>armeabi-v7a</classifier>
+      <type>a</type>
+    </dependency>
+    <dependency>
+      <groupId>com.simpligility.maven.plugins.samples</groupId>
+      <artifactId>native-static-lib</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
       <classifier>x86</classifier>
       <type>a</type>
     </dependency>

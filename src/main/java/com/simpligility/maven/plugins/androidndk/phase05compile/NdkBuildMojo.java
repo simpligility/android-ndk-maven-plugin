@@ -280,6 +280,12 @@ public class NdkBuildMojo extends AbstractMojo
     private List<AdditionallyBuiltModule> additionallyBuiltModules;
 
     /**
+     * Flag indicating whether or not the build should be skipped entirely
+     */
+    @Parameter( defaultValue = "false" )
+    private boolean skip;
+
+    /**
      * The Jar archiver.
      */
     @Component( role = org.codehaus.plexus.archiver.Archiver.class, hint = "jar" )
@@ -318,6 +324,12 @@ public class NdkBuildMojo extends AbstractMojo
      */
     public void execute() throws MojoExecutionException, MojoFailureException
     {
+        if ( skip )
+        {
+            getLog().info( "Skipping execution as per configuration" );
+            return;
+        }
+
         // Validate the NDK
         final File ndkBuildFile = new File( getAndroidNdk().getNdkBuildPath() );
         NativeHelper.validateNDKVersion( ndkBuildFile.getParentFile() );
@@ -569,8 +581,7 @@ public class NdkBuildMojo extends AbstractMojo
     /**
      * Attaches native libs to project.
      */
-    private void processCompiledArtifacts( String architecture, final File makefileCaptureFile ) throws IOException,
-            MojoExecutionException
+    private void processCompiledArtifacts( String architecture, final File makefileCaptureFile ) throws IOException, MojoExecutionException
     {
         // Where the NDK build creates the libs.
         final File nativeLibOutputDirectory = new File( librariesOutputDirectory, architecture );

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                              http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.simpligility.maven.plugins.samples</groupId>
+    <artifactId>native-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>native-code-two-executions</artifactId>
+    <!--
+    Packaging is defined as 'so' - this will indicate to the Maven Android
+    plugin that it is meant to compile the native code.  The resulting native
+    library is attached to the build
+    -->
+  <packaging>so</packaging>
+
+  <name>Android NDK - Native Code with Two Executions</name>
+
+  <properties>
+    <skip.debug.build>true</skip.debug.build>
+  </properties>
+
+  <profiles>
+    <profile>
+      <id>debug</id>
+      <properties>
+        <skip.debug.build>false</skip.debug.build>
+      </properties>
+    </profile>
+  </profiles>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.simpligility.maven.plugins</groupId>
+        <artifactId>android-ndk-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <executions>
+
+          <!-- Makes an additional build, with debug, but only if skip.debug.build is enabled via the -Pdebug profile -->
+          <execution>
+            <id>debug-build</id>
+            <goals>
+              <goal>ndk-build</goal>
+            </goals>
+            <phase>compile</phase>
+            <configuration>
+              <skip>${skip.debug.build}</skip>
+              <finalLibraryName>native-code-two-executions-debug</finalLibraryName>
+              <classifier>debug</classifier>
+              <systemProperties>
+                <ENABLE_DEBUG>1</ENABLE_DEBUG>
+              </systemProperties>
+            </configuration>
+          </execution>
+        </executions>
+
+        <!-- No other configuration needed for the release build -->
+
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
