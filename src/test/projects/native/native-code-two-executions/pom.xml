@@ -40,7 +40,8 @@
         <extensions>true</extensions>
         <executions>
 
-          <!-- Makes an additional build, with debug, but only if skip.debug.build is enabled via the -Pdebug profile -->
+          <!-- Makes an additional build, with debug, but only if skipping the build -->
+          <!-- is set to false via the -Pdebug profile -->
           <execution>
             <id>debug-build</id>
             <goals>
