@@ -20,7 +20,7 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- Pull in the dependency on the native library already compiled in the native-code-including-stastic-lib module -->
+    <!-- Pull in the dependency on the native library already compiled in the native-code-including-static-lib module -->
     <dependency>
       <groupId>com.simpligility.maven.plugins.samples</groupId>
       <artifactId>native-code-including-static-lib</artifactId>
