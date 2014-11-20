@@ -12,32 +12,29 @@
   <name>Android NDK - Aggregator</name>
   <properties>
     <!-- at test time this will be overridden with snapshot version -->
-    <it-plugin.version>0.1.0-SNAPSHOT</it-plugin.version>
+    <it-plugin.version>0.1.1-SNAPSHOT</it-plugin.version>
   </properties>
 
   <modules>
     <module>native-code</module>
     <module>native-static-lib</module>
     <module>native-code-including-static-lib</module>
-
     <module>java-with-native-library</module>
     <module>java-with-native-dependency</module>
     <module>java-with-native-statically-linked-dependency</module>
     <module>java-with-native-dependency-x86-only</module>
-
     <module>mixed-java-native-code</module>
+    <module>native-code-two-executions</module>
 
     <!--
-        <module>java-transient-dependency</module>
+      <module>java-transient-dependency</module>
+      <module>mixed-java-native-code</module>
+      <module>native-apklib</module>
+      <module>java-with-native-apklib-dependency</module>
+      <module>mixed-java-native-with-apklib-dependency</module>
+      <module>transient-apklib-with-native</module>
     -->
-    <!--            <module>mixed-java-native-code</module>
-                <module>native-apklib</module>
-                <module>java-with-native-apklib-dependency</module>
-            -->
-    <!--     <module>mixed-java-native-with-apklib-dependency</module> -->
-    <!--
-        <module>transient-apklib-with-native</module>
-    -->
+
   </modules>
 
   <dependencyManagement>
@@ -65,7 +62,7 @@
           <artifactId>android-ndk-maven-plugin</artifactId>
           <version>${it-plugin.version}</version>
           <configuration>
-            <architectures>x86 armeabi</architectures>
+            <architectures>x86 armeabi armeabi-v7a</architectures>
             <!-- To override the toolchains for each architecture, specify a mapping as shown below-->
             <additionalCommandline>V=1 -B</additionalCommandline>
           </configuration>
