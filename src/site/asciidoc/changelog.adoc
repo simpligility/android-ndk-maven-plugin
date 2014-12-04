@@ -1,5 +1,10 @@
 = Changelog
 
+== 0.2.0
+
+* Changed test to use Android Maven Plugin 4.0.0
+** https://github.com/simpligility/android-ndk-maven-plugin/pull/4
+** contributed by Manfred Moser http://simpligility.com
 
 == 0.1.0 - released 2014-10-28
 
