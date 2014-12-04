@@ -5,6 +5,9 @@
 * Changed test to use Android Maven Plugin 4.0.0
 ** https://github.com/simpligility/android-ndk-maven-plugin/pull/4
 ** contributed by Manfred Moser http://simpligility.com
+* Add ability to skip execution of the plugin
+** https://github.com/simpligility/android-ndk-maven-plugin/pull/3
+** contributed by Johan Lindquist
 
 == 0.1.0 - released 2014-10-28
 
