@@ -70,27 +70,27 @@ public class NdkBuildMojo extends AbstractMojo
     public static final String ENV_ANDROID_NDK_HOME = "ANDROID_NDK_HOME";
 
     /**
-     * <p>Parameter designed to pick up <code>-Dandroid.ndk.path</code> in case there is no pom with an
+     * <p>Parameter designed to pick up <code>-Dandroid.ndk.ndkPath</code> in case there is no pom with an
      * <code>&lt;ndk&gt;</code> configuration tag.</p>
      */
-    @Parameter( property = "android.ndk.path", readonly = true )
+    @Parameter( property = "android.ndk.ndkPath", readonly = true )
     private File ndkPath;
 
     /**
      * Allows for overriding the default ndk-build executable.
      */
-    @Parameter( property = "android.ndk.ndk-build-executable" )
+    @Parameter( property = "android.ndk.ndkBuildExecutable" )
     private String ndkBuildExecutable;
 
     /**
      * Folder in which the NDK makefiles are constructed.
      */
-    @Parameter( property = "android.ndk.ndk-build-directory", defaultValue = "${project.build.directory}/android-ndk-maven-plugin", readonly = true )
+    @Parameter( property = "android.ndk.buildDirectory", defaultValue = "${project.build.directory}/android-ndk-maven-plugin", readonly = true )
     private File buildDirectory;
 
     /** Folder in which the ndk-build command is executed.  This is using the -C command line flag.
      */
-    @Parameter( property = "android.ndk.ndk-working-directory", defaultValue = "${project.basedir}", readonly = true )
+    @Parameter( property = "android.ndk.workingDirectory", defaultValue = "${project.basedir}", readonly = true )
     private File workingDirectory;
 
     /** Specifies the classifier with which the artifact should be stored in the repository
@@ -100,7 +100,7 @@ public class NdkBuildMojo extends AbstractMojo
 
     /** Specifies additional command line parameters to pass to ndk-build
      */
-    @Parameter( property = "android.ndk.build.additional-command-line" )
+    @Parameter( property = "android.ndk.additionalCommandline" )
     protected String additionalCommandline;
 
     /**
@@ -109,7 +109,7 @@ public class NdkBuildMojo extends AbstractMojo
      * The NDK build executable seems determined to create the native libs in the root folder.
      * TODO work out how to create them in /target.
      */
-    @Parameter( property = "android.ndk.build.objects-output-directory", defaultValue = "${project.basedir}/obj/local", readonly = true )
+    @Parameter( property = "android.ndk.objectsOutputDirectory", defaultValue = "${project.basedir}/obj/local", readonly = true )
     private File objectsOutputDirectory;
 
     /**
@@ -118,7 +118,7 @@ public class NdkBuildMojo extends AbstractMojo
      * The NDK build executable seems determined to create the native libs in the root folder.
      * TODO work out how to create them in /target.
      */
-    @Parameter( property = "android.ndk.build.library-output-directory", defaultValue = "${project.basedir}/libs", readonly = true )
+    @Parameter( property = "android.ndk.librariesOutputDirectory", defaultValue = "${project.basedir}/libs", readonly = true )
     private File librariesOutputDirectory;
 
     /**
@@ -130,7 +130,7 @@ public class NdkBuildMojo extends AbstractMojo
     /**
      * Defines the architectures for the NDK build - this is a space separated list (i.e x86 armeabi)
      */
-    @Parameter( property = "android.ndk.build.architectures" )
+    @Parameter( property = "android.ndk.architectures" )
     private String architectures;
 
     /**
@@ -147,7 +147,7 @@ public class NdkBuildMojo extends AbstractMojo
      * Flag indicating whether the header files used in the build should be included and attached to the build as
      * an additional artifact.
      */
-    @Parameter( property = "android.ndk.build.attach-header-files", defaultValue = "true" )
+    @Parameter( property = "android.ndk.attachHeaderFiles", defaultValue = "true" )
     private Boolean attachHeaderFiles;
 
     /**
@@ -157,7 +157,7 @@ public class NdkBuildMojo extends AbstractMojo
      * added to the resulting header archive.  This may be undesirable in most cases and is therefore turned off by
      * default.
      */
-    @Parameter( property = "android.ndk.build.use-local-src-include-paths", defaultValue = "false" )
+    @Parameter( property = "android.ndk.useLocalSrcIncludePaths", defaultValue = "false" )
     private Boolean useLocalSrcIncludePaths;
 
     /**
@@ -221,7 +221,7 @@ public class NdkBuildMojo extends AbstractMojo
      * Flag indicating whether warnings should be ignored while compiling.  If true,
      * the build will not fail if warning are found during compile.
      */
-    @Parameter( property = "android.ndk.build.ignore-build-warnings", defaultValue = "true" )
+    @Parameter( property = "android.ndk.ignoreBuildWarnings", defaultValue = "true" )
     private Boolean ignoreBuildWarnings;
 
     /**
@@ -231,7 +231,7 @@ public class NdkBuildMojo extends AbstractMojo
      * If the pattern matches, the output from the compiler will <strong>not</strong> be considered an error and compile
      * will be successful.
      */
-    @Parameter( property = "android.ndk.build.build-warnings-regular-expression", defaultValue = ".*[warning|note]: .*" )
+    @Parameter( property = "android.ndk.buildWarningsRegularExpression", defaultValue = ".*[warning|note]: .*" )
     private String buildWarningsRegularExpression;
 
     /** Specifies the NDK toolchain to use for the build.  This will be using the NDK_TOOLCHAIN define on the ndk-build commandline.
@@ -243,25 +243,25 @@ public class NdkBuildMojo extends AbstractMojo
      * Specifies the final name of the library output by the build (this allows the pom to override the default artifact name).
      * The value should not include the 'lib' prefix or filename extension (e.g. '.so').
      */
-    @Parameter( property = "android.ndk.build.build.final-library-name" )
+    @Parameter( property = "android.ndk.finalLibraryName" )
     private String finalLibraryName;
 
     /**
      * Specifies the makefile to use for the build (if other than the default Android.mk).
      */
-    @Parameter
+    @Parameter( property = "android.ndk.makefile" )
     private String makefile;
 
     /**
      * Specifies the application makefile to use for the build (if other than the default Application.mk).
      */
-    @Parameter
+    @Parameter( property = "android.ndk.applicationMakefile" )
     private String applicationMakefile;
 
     /**
      * Flag indicating whether to use the max available jobs for the host machine
      */
-    @Parameter( property = "android.ndk.build.maxJobs", defaultValue = "false" )
+    @Parameter( property = "android.ndk.maxJobs", defaultValue = "false" )
     private Boolean maxJobs;
 
 
