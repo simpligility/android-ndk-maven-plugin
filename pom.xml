@@ -16,7 +16,7 @@
   <parent>
     <groupId>com.simpligility.maven</groupId>
     <artifactId>progressive-organization-pom</artifactId>
-    <version>2.1.1</version>
+    <version>2.3.0</version>
   </parent>
 
   <groupId>com.simpligility.maven.plugins</groupId>
@@ -34,9 +34,9 @@
     <scm.branch>master</scm.branch>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-    <maven-plugin-plugin.version>3.2</maven-plugin-plugin.version>
     <maven.api.version>3.0.5</maven.api.version>
 
+    <takari.test.version>2.1.0</takari.test.version>
 
     <easymock.version>3.2</easymock.version>
     <powermock.version>1.5.2</powermock.version>
@@ -197,6 +197,11 @@
     </dependency>
 
     <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.4</version>
+    </dependency>
+    <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
       <version>3.1</version>
@@ -204,9 +209,23 @@
 
     <!-- Various Testing Dependencies -->
     <dependency>
+      <groupId>org.apache.maven.plugin-testing</groupId>
+      <artifactId>maven-plugin-testing-harness</artifactId>
+      <version>3.2.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>io.takari.maven.plugins</groupId>
       <artifactId>takari-plugin-testing</artifactId>
-      <version>${takari.plugins.version}</version>
+      <version>${takari.test.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.takari.maven.plugins</groupId>
+      <artifactId>takari-plugin-integration-testing</artifactId>
+      <version>${takari.test.version}</version>
+      <type>pom</type>
+      <scope>test</scope>
     </dependency>
 
     <dependency>
@@ -282,7 +301,7 @@
         <plugin>
           <groupId>org.codehaus.plexus</groupId>
           <artifactId>plexus-component-metadata</artifactId>
-          <version>1.5.5</version>
+          <version>1.6</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -462,49 +481,16 @@
       <!-- add support for reactor resolution based IT tests -->
       <plugin>
         <groupId>io.takari.maven.plugins</groupId>
-        <artifactId>takari-plugin-testing-plugin</artifactId>
-        <version>${takari.plugins.version}</version>
-        <executions>
+        <artifactId>takari-lifecycle-plugin</artifactId>
+        <version>1.10.2</version>
+        <extensions>true</extensions>
+         <executions>
           <execution>
             <id>testProperties</id>
             <phase>process-test-resources</phase>
             <goals>
               <goal>testProperties</goal>
             </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <!-- get Maven runtime required for takari-plugin-testing based integration 
-        tests -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>unpack</id>
-            <phase>generate-test-resources</phase>
-            <goals>
-              <goal>unpack</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${project.build.directory}/maven-installation</outputDirectory>
-              <artifactItems>
-                <artifactItem>
-                  <groupId>org.apache.maven</groupId>
-                  <artifactId>apache-maven</artifactId>
-                  <version>3.0.5</version>
-                  <classifier>bin</classifier>
-                  <type>tar.gz</type>
-                </artifactItem>
-                <artifactItem>
-                  <groupId>org.apache.maven</groupId>
-                  <artifactId>apache-maven</artifactId>
-                  <version>3.2.3</version>
-                  <classifier>bin</classifier>
-                  <type>tar.gz</type>
-                </artifactItem>
-              </artifactItems>
-            </configuration>
           </execution>
         </executions>
       </plugin>
