@@ -1,0 +1,85 @@
+= Android Maven Plugin Example Projects
+
+All the examples are located in +src/test/projects+ of the plugin code base. They are 
+all stand-alone Maven projects that can be copied into a separate location and 
+used as a basis or inspiration for your own projects and serve as useful
+examples for all the different use cases of the Android Maven Plugin.
+
+The are also built as part of the integration tests and the tests that run those
+builds are all named '*SampleIT.java'. 
+
+Typically you can do a full build of the application in the example with
+
+----
+mvn clean install
+----
+
+Multi-module examples will potentially require an attached device or emulator
+and deploy the application and the integrations tests as part of the above
+invocation.
+
+In all cases you can deploy the application with
+
+----
+mvn android:deploy
+----
+
+and even start it with
+
+----
+mvn android:run
+----
+
+Check out the documentation on other link:plugin-info.html[goals of the plugin]
+for other potential tasks to run and inspect the POM file to see used
+the configuration and the IT test Java class for other example invocations.
+
+== HelloFlashLight
+
+Located in the +helloflashlight+ folder. A flashlight
+application as an example for a simple Android application build.
+
+== MorseFlash
+
+Located in the +morseflash+ folder. A multi-module application with a
+simple jar project for non-Android Java classes, the application and a
+integration test module.
+
+== ActionBarSherlock Example
+ 
+Located in the +aar-actionbarsherlock-example+ folder. An example
+application that uses the ActionBarSherlock library packaged as an AAR
+as a dependency. 
+
+== API Demos Application
+
+Located in the +apidemos-android-16+ folder. The example application
+from the Android SDK (API level 16) repackaged to be built with the
+Android Maven Plugin.
+
+== Scala
+
+Located in the +scala+ folder. A simple Android application written
+with the Scala programming language.
+
+== Support4Demos
+
+Located in the +support4demos+ folder. A simple demo application using
+the support library.
+
+== Library Projects
+
+Located in the +libraryprojects+ folder. A number of library project
+using +apklib+ and +aar+ packaging as well as transitive dependencies
+and a simple application consuming all those including integration
+tests verifying the correct consumption of the dependencies and their
+resources and code.
+
+== Native
+
+Located in the +native+ folder. A number of projects using the Android
+NDK to create libraries and applications using them. 
+
+== AAR Child
+
+Located in the +aar-child+ folder. A test project for AAR usage.
