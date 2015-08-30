@@ -1,1 +1,30 @@
 = Android NDK Maven Plugin
+
+The Android NDK Maven Plugin is used to build native libraries and components with the help of the Android NDK and Apache Maven.
+
+These components can then be used to create Android applications (APK) or archives (AAR) with the Android Maven Plugin.
+
+The plugin includes numerous features with link:usage.html[some minimal setup for usage].
+
+== Required Setup
+
+* Android SDK r21.1 or later, latest is best supported
+* Android NDK ????, latest is best supported
+* Java Development Kit 1.6 - 1.8 as supported by the Android SDK
+* Apache Maven 3.0.5+
+* Environment variables and PATH settings:
+** Set ANDROID_HOME to point to the path of your installed Android SDK
+** Set ANDROID_NDK_HOME to point to the path of your installed Android NDK
+** $ANDROID_HOME/tools as well as $ANDROID_HOME/platform-tools to your $PATH
+** Or on Windows %ANDROID_HOME%\tools and %ANDROID_HOME%\platform-tools
+
+== Getting Started
+
+The best examples for project setups are the link:examples.html[example projects] that are part of the plugin code base and are run with each build and release.
+
+== Further Information and Help
+
+* Plugin goal documentation on this site
+* Via the link:help-mojo.html[+help+ goal] of the plugin itself
+* Specific guides and articles on this site
+* Join and contribute on the http://groups.google.com/group/maven-android-developers[Maven Android Developers mailing list]
