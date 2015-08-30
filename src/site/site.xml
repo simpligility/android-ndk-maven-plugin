@@ -11,10 +11,19 @@
         <version>1.4.0</version>
     </skin>
     <custom>
-        <fluidoSkin>
-            <topBarEnabled>true</topBarEnabled>
-            <sideBarEnabled>true</sideBarEnabled>
-        </fluidoSkin>
+      <fluidoSkin>
+        <topBarEnabled>true</topBarEnabled>
+        <sideBarEnabled>true</sideBarEnabled>
+        <googleSearch>
+          <sitesearch/>
+        </googleSearch>
+        <gitHub>
+          <projectId>simpligility/android-ndk-maven-plugin</projectId>
+          <ribbonOrientation>right</ribbonOrientation>
+          <ribbonColor>orange</ribbonColor>
+        </gitHub>
+        <breadcrumbDivider>»</breadcrumbDivider>
+      </fluidoSkin>
     </custom>
 
     <body>
