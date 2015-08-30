@@ -39,7 +39,7 @@
     <takari.test.version>2.4.0</takari.test.version>
 
     <easymock.version>3.2</easymock.version>
-    <powermock.version>1.5.2</powermock.version>
+    <powermock.version>1.6.2</powermock.version>
 
     <!-- Attention - make sure that the tools version is the versions of 
       the transitive dependencies of the builder version -->
