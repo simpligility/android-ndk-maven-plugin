@@ -3,24 +3,24 @@
 Beyond fulfilling link:index.html[the required setup] there is some minimal 
 configuration of your POM needed:  
 
-* Android Maven Plugin to be added to the plugin section
+* Android NDK Maven Plugin to be added to the plugin section
 * +extensions+ set to +true+ for the plugin
-* usage of a supported +packaging+: +apk+, +aar+ or +apklib+ 
+* usage of a supported +packaging+: +so+ or +a+ 
 
 A small example would be:
 
 ----
 <project>
   <groupId>com.simpligility.android</groupId>
-  <artifactId>helloflashlight</artifactId>
+  <artifactId>native-example</artifactId>
   <version>1.0.0</version>
-  <packaging>apk</packaging>
+  <packaging>so</packaging>
   <build>
     <plugins>
       <plugin>
         <groupId>com.simpligility.maven.plugins</groupId>
-        <artifactId>android-maven-plugin</artifactId>
-        <version>4.3.0</version> <!-- use latest release -->
+        <artifactId>android-ndk-maven-plugin</artifactId>
+        <version>1.0.0</version> <!-- use latest release -->
         <extensions>true</extensions>
       </plugin>
     </plugins>
