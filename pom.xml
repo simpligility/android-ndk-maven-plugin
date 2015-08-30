@@ -43,8 +43,8 @@
 
     <!-- Attention - make sure that the tools version is the versions of 
       the transitive dependencies of the builder version -->
-    <android.builder.version>1.0.0</android.builder.version>
-    <android.tools.version>24.0.0</android.tools.version>
+    <android.builder.version>1.2.2</android.builder.version>
+    <android.tools.version>24.2.2</android.tools.version>
   </properties>
 
   <scm>
@@ -96,7 +96,14 @@
   </prerequisites>
 
   <dependencies>
-  
+    <!--  this dependency manages asm and overrides the one from
+    the android sdk, we have to take this out again -->
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm</artifactId>
+      <version>4.1</version>
+    </dependency>
+
     <dependency>
       <groupId>com.android.tools</groupId>
       <artifactId>common</artifactId>
