@@ -23,10 +23,10 @@ under the License.
     <link>https://github.com/simpligility/android-ndk-maven-plugin</link>
     <description>Android NDK Maven Plugin - android-ndk-maven-plugin - Checkstyle report</description>
     <language>en-us</language>
-    <copyright>&#169;2014 simpligility technologies inc.</copyright>
+    <copyright>&#169;2014 - 2015 simpligility technologies inc.</copyright>
     <item>
       <title>File: 22,
-             Errors: 3467,
+             Errors: 3492,
              Warnings: 0,
              Infos: 0
       </title>
@@ -97,7 +97,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  363
+                  362
                 </td>
               </tr>
                           <tr>
@@ -125,7 +125,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  78
+                  79
                 </td>
               </tr>
                           <tr>
@@ -181,7 +181,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  494
+                  488
                 </td>
               </tr>
                           <tr>
@@ -265,7 +265,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  310
+                  330
                 </td>
               </tr>
                           <tr>
@@ -279,7 +279,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  921
+                  932
                 </td>
               </tr>
                           <tr>
