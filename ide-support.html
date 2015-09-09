@@ -10,7 +10,11 @@
     <meta name="Date-Revision-yyyymmdd" content="20150908" />
     <meta http-equiv="Content-Language" content="en" />
     <title>Android NDK Maven Plugin - 
-    android-ndk:help</title>
+
+
+
+
+IDE Support</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.4.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -19,7 +23,7 @@
     <script type="text/javascript" src="./js/apache-maven-fluido-1.4.min.js"></script>
 
     
-                  </head>
+    <meta charset="UTF-8" /><!-- [if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"/><![endif] --><meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Asciidoctor 1.5.0" />              </head>
         <body class="topBarEnabled">
           
     
@@ -174,6 +178,8 @@
 </li>
                                   <li>      <a href="xref-test/index.html"  title="Test Source Xref">Test Source Xref</a>
 </li>
+                                  <li>      <a href="checkstyle.html"  title="Checkstyle">Checkstyle</a>
+</li>
                                   <li>      <a href="cpd.html"  title="CPD">CPD</a>
 </li>
                                   <li>      <a href="pmd.html"  title="PMD">PMD</a>
@@ -272,12 +278,10 @@
         Examples</a>
             </li>
                 
-      <li>
+      <li class="active">
   
-                          <a href="ide-support.html" title="IDE Support">
-          <span class="none"></span>
-        IDE Support</a>
-            </li>
+            <a href="#"><span class="none"></span>IDE Support</a>
+          </li>
                 
       <li>
   
@@ -394,7 +398,7 @@
           <span class="icon-chevron-right"></span>
         Project Information</a>
                   </li>
-                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                        
       <li>
   
                           <a href="project-reports.html" title="Project Reports">
@@ -429,153 +433,81 @@
         <div id="bodyColumn"  class="span10" >
                                   
             
-  
-    <div class="section">
-<h2>android-ndk:help<a name="android-ndk:help"></a></h2>
-      
-<p><b>Full name</b>:</p>
-      
-<p>com.simpligility.maven.plugins:android-ndk-maven-plugin:0.1.1-SNAPSHOT:help</p>
-      
-<p><b>Description</b>:</p>
-      
-<div>Display help information on android-ndk-maven-plugin.<br />
-Call <tt>mvn android-ndk:help -Ddetail=true
--Dgoal=&lt;goal-name&gt;</tt> to display parameter details.</div>
-      
-<p><b>Attributes</b>:</p>
-      
-<ul>
-        
-<li>The goal is thread-safe and supports parallel builds.</li>
-      </ul>
-      
-<div class="section">
-<h3>Optional Parameters<a name="Optional_Parameters"></a></h3>
-        
-<table class="table table-striped" border="0">
-          
-<tr class="a">
-            
-<th>Name</th>
-            
-<th>Type</th>
-            
-<th>Since</th>
-            
-<th>Description</th>
-          </tr>
-          
-<tr class="b">
-            
-<td><b><a href="#detail">detail</a></b></td>
-            
-<td><tt>boolean</tt></td>
-            
-<td><tt>-</tt></td>
-            
-<td>If <tt>true</tt>, display all settable properties for each
-goal.<br /><b>Default value is</b>: <tt>false</tt>.<br /><b>User property is</b>: <tt>detail</tt>.</td>
-          </tr>
-          
-<tr class="a">
-            
-<td><b><a href="#goal">goal</a></b></td>
-            
-<td><tt>String</tt></td>
-            
-<td><tt>-</tt></td>
-            
-<td>The name of the goal for which to show help. If unspecified, all
-goals will be displayed.<br /><b>User property is</b>: <tt>goal</tt>.</td>
-          </tr>
-          
-<tr class="b">
-            
-<td><b><a href="#indentSize">indentSize</a></b></td>
-            
-<td><tt>int</tt></td>
-            
-<td><tt>-</tt></td>
-            
-<td>The number of spaces per indentation level, should be positive.<br /><b>Default value is</b>: <tt>2</tt>.<br /><b>User property is</b>: <tt>indentSize</tt>.</td>
-          </tr>
-          
-<tr class="a">
-            
-<td><b><a href="#lineLength">lineLength</a></b></td>
-            
-<td><tt>int</tt></td>
-            
-<td><tt>-</tt></td>
-            
-<td>The maximum length of a display line, should be positive.<br /><b>Default value is</b>: <tt>80</tt>.<br /><b>User property is</b>: <tt>lineLength</tt>.</td>
-          </tr>
-        </table>
-      </div>
-      
-<div class="section">
-<h3>Parameter Details<a name="Parameter_Details"></a></h3>
-        
-<p><b><a name="detail">detail</a>:</b></p>
-        
-<div>If <tt>true</tt>, display all settable properties for each
-goal.</div>
-        
-<ul>
-          
-<li><b>Type</b>: <tt>boolean</tt></li>
-          
-<li><b>Required</b>: <tt>No</tt></li>
-          
-<li><b>User Property</b>: <tt>detail</tt></li>
-          
-<li><b>Default</b>: <tt>false</tt></li>
-        </ul><hr />
-<p><b><a name="goal">goal</a>:</b></p>
-        
-<div>The name of the goal for which to show help. If unspecified, all
-goals will be displayed.</div>
-        
-<ul>
-          
-<li><b>Type</b>: <tt>java.lang.String</tt></li>
-          
-<li><b>Required</b>: <tt>No</tt></li>
-          
-<li><b>User Property</b>: <tt>goal</tt></li>
-        </ul><hr />
-<p><b><a name="indentSize">indentSize</a>:</b></p>
-        
-<div>The number of spaces per indentation level, should be positive.</div>
-        
-<ul>
-          
-<li><b>Type</b>: <tt>int</tt></li>
-          
-<li><b>Required</b>: <tt>No</tt></li>
-          
-<li><b>User Property</b>: <tt>indentSize</tt></li>
-          
-<li><b>Default</b>: <tt>2</tt></li>
-        </ul><hr />
-<p><b><a name="lineLength">lineLength</a>:</b></p>
-        
-<div>The maximum length of a display line, should be positive.</div>
-        
-<ul>
-          
-<li><b>Type</b>: <tt>int</tt></li>
-          
-<li><b>Required</b>: <tt>No</tt></li>
-          
-<li><b>User Property</b>: <tt>lineLength</tt></li>
-          
-<li><b>Default</b>: <tt>80</tt></li>
-        </ul>
-      </div>
-    </div>
-  
+
+
+
+
+<h1>IDE Support</h1>
+
+
+
+
+
+
+<p>The Android NDK Maven Plugin should work well with any IDE that has support for Android development and Maven projects
+coupled with support for native development. All this is managed by external projects. In the following are a few
+pointers.</p>
+
+
+
+
+
+<div class="section" id="_eclipse">
+<h2 id="_eclipse">Eclipse</h2>
+
+
+
+<p>This works fine for full development. You will need to have ADT, <a class="externalLink" href="http://eclipse.org/m2e/">M2Eclipse</a>
+and <a class="externalLink" href="http://rgladwell.github.io/m2e-android/">m2e-android</a> installed as well as the
+<a class="externalLink" href="https://eclipse.org/cdt">CDT tooling from Eclipse</a>.</p>
+
+
+
+<p>In the future this might work become even better with <a class="externalLink" href="https://projects.eclipse.org/projects/tools.andmore">Andmore</a>.
+Eclipse developers have contributed features to this plugin.</p>
+
+
+
+
+</div>
+<div class="section" id="_intellij_android_studio">
+<h2 id="_intellij_android_studio">IntelliJ/Android Studio</h2>
+
+
+
+<p>Not sure at this stage.</p>
+
+
+
+
+</div>
+<div class="section" id="_netbeans">
+<h2 id="_netbeans">Netbeans</h2>
+
+
+
+<p>Not sure at this stage.</p>
+
+
+
+
+</div>
+<div class="section" id="_others">
+<h2 id="_others">Others</h2>
+
+
+
+<p>Not sure at this stage.</p>
+
+
+
+
+
+
+Last updated 2015-09-08 22:21:32 PDT
+
+
+</div>
 
                   </div>
             </div>
