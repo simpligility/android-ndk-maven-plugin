@@ -1,5 +1,9 @@
 = Changelog
 
+Detailed changes can be seen in the 
+https://github.com/simpligility/android-ndk-maven-plugin/commits/master[git commit log]. 
+
+
 == 0.2.0 - upcoming
 
 * Changed test to use Android Maven Plugin 4.0.0
@@ -11,6 +15,7 @@
 * Updated to Android SDK Libraries 1.0.0/24.0.0
 ** contributed by Manfred Moser http://simpligility.com
 * Lots of documentation updates and additions including site publishing
+** fixes https://github.com/simpligility/android-ndk-maven-plugin/issues/7
 ** contributed by Manfred Moser http://simpligility.com
 * Various dependency and plugin updates
 ** contributed by Manfred Moser http://simpligility.com
