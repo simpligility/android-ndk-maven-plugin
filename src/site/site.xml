@@ -47,12 +47,13 @@
         </menu>
         <menu name="Related Projects">
           <item name="m2e-android" href="http://rgladwell.github.io/m2e-android/"/>
-          <item name="Android Maven Plugin" href="https://github.com/simpligility/android-ndk-maven-plugin/"/>
+          <item name="Android Maven Plugin" href="https://github.com/simpligility/android-maven-plugin/"/>
           <item name="Andmore" href="https://projects.eclipse.org/projects/tools.andmore"/>
           <item name="Maven Android SDK Deployer" href="https://github.com/simpligility/maven-android-sdk-deployer"/>
           <item name="Android Tools" href="http://tools.android.com/"/>
           <item name="Apache Maven" href="http://maven.apache.org/"/>
           <item name="M2Eclipse" href="http://eclipse.org/m2e/"/>
+          <item name="Eclipse CDT" href="https://eclipse.org/cdt/"/>
         </menu>
 
         <menu ref="reports" />
