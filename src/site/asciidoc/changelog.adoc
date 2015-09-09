@@ -19,6 +19,8 @@ https://github.com/simpligility/android-ndk-maven-plugin/commits/master[git comm
 ** contributed by Manfred Moser http://simpligility.com
 * Various dependency and plugin updates
 ** contributed by Manfred Moser http://simpligility.com
+* Updated Travis CI config to use Android support
+** contributed by Manfred Moser http://simpligility.com
 
 == 0.1.0 - released 2014-10-28
 
