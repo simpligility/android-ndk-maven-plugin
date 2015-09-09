@@ -10,6 +10,10 @@
 ** contributed by Johan Lindquist
 * Updated to Android SDK Libraries 1.0.0/24.0.0
 ** contributed by Manfred Moser http://simpligility.com
+* Lots of documentation updates and additions including site publishing
+** contributed by Manfred Moser http://simpligility.com
+* Various dependency and plugin updates
+** contributed by Manfred Moser http://simpligility.com
 
 == 0.1.0 - released 2014-10-28
 
