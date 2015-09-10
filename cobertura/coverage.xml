@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.04359925788497217" branch-rate="0.021660649819494584" lines-covered="47" lines-valid="1078" branches-covered="12" branches-valid="554" complexity="2.857894736842105" version="2.1.1" timestamp="1441776313056">
+<coverage line-rate="0.04359925788497217" branch-rate="0.021660649819494584" lines-covered="47" lines-valid="1078" branches-covered="12" branches-valid="554" complexity="2.857894736842105" version="2.1.1" timestamp="1441862197489">
 	<sources>
-		<source>/Volumes/mac-data/dev/github/simpligility/android-ndk-maven-plugin/src/main/java</source>
+		<source>/Volumes/mac-data/dev/github/simpligility/android-ndk-maven-plugin/target/checkout/target/generated-sources/annotations</source>
 		<source>--source</source>
-		<source>/Volumes/mac-data/dev/github/simpligility/android-ndk-maven-plugin/target/generated-sources/annotations</source>
-		<source>/Volumes/mac-data/dev/github/simpligility/android-ndk-maven-plugin/target/generated-sources/plugin</source>
+		<source>/Volumes/mac-data/dev/github/simpligility/android-ndk-maven-plugin/target/checkout/target/generated-sources/plugin</source>
+		<source>/Volumes/mac-data/dev/github/simpligility/android-ndk-maven-plugin/target/checkout/src/main/java</source>
 	</sources>
 	<packages>
 		<package name="com.simpligility.maven.plugins.androidndk" line-rate="0.12234042553191489" branch-rate="0.0" complexity="2.1785714285714284">
