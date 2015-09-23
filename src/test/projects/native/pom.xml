@@ -12,7 +12,7 @@
   <name>Android NDK - Aggregator</name>
   <properties>
     <!-- at test time this will be overridden with snapshot version -->
-    <it-plugin.version>0.1.1-SNAPSHOT</it-plugin.version>
+    <it-plugin.version>1.0.1-SNAPSHOT</it-plugin.version>
   </properties>
 
   <modules>
@@ -25,7 +25,7 @@
     <module>java-with-native-dependency-x86-only</module>
     <module>mixed-java-native-code</module>
     <module>native-code-two-executions</module>
-
+    <module>native-code-nonstandard-structure</module>
     <!--
       <module>java-transient-dependency</module>
       <module>mixed-java-native-code</module>
