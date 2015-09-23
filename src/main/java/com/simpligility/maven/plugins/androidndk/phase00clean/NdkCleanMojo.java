@@ -3,10 +3,8 @@ package com.simpligility.maven.plugins.androidndk.phase00clean;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.codehaus.plexus.util.FileUtils;
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  * @author Johan Lindquist <johanlindquist@gmail.com>
@@ -53,39 +51,6 @@ public class NdkCleanMojo extends AbstractMojo
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException
     {
-        if ( ndkBuildLibsOutputDirectory.exists() )
-        {
-            if ( ! skipBuildLibsOutputDirectory )
-            {
-                getLog().debug( "Cleaning out native library code directory : " + ndkBuildLibsOutputDirectory
-                        .getAbsolutePath() );
-                try
-                {
-                    FileUtils.deleteDirectory( ndkBuildLibsOutputDirectory );
-                }
-                catch ( IOException e )
-                {
-                    getLog().error( "Error deleting directory: " + e.getMessage(), e );
-                }
-            }
-        }
-
-        if ( ndkBuildObjOutputDirectory.exists() )
-        {
-            if ( ! skipBuildObjsOutputDirectory )
-            {
-                getLog().debug(
-                        "Cleaning out native object code directory: " + ndkBuildObjOutputDirectory.getAbsolutePath() );
-                try
-                {
-                    FileUtils.deleteDirectory( ndkBuildObjOutputDirectory );
-                }
-                catch ( IOException e )
-                {
-                    getLog().error( "Error deleting directory: " + e.getMessage(), e );
-                }
-            }
-        }
 
     }
 

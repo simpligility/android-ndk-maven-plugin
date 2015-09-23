@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright (C) 2015 CNH Industrial NV. All rights reserved.
+  ~
+  ~ This software contains proprietary information of CNH Industrial NV. Neither
+  ~ receipt nor possession thereof confers any right to reproduce, use, or
+  ~ disclose in whole or in part any such information without written
+  ~ authorization from CNH Industrial NV.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                              http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+   <parent>
+      <groupId>com.simpligility.maven.plugins.samples</groupId>
+      <artifactId>native-parent</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+   </parent>
+
+  <artifactId>native-code-nonstandard-structure</artifactId>
+
+  <packaging>so</packaging>
+
+  <name>Android NDK - Native Sample Non-standard folder structure</name>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.simpligility.maven.plugins</groupId>
+        <artifactId>android-ndk-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <makefile>src/Android.mk</makefile>
+          <applicationMakefile>src/Application.mk</applicationMakefile>
+           <attachHeaderFiles>false</attachHeaderFiles>
+           <clearNativeArtifacts>false</clearNativeArtifacts>
+           <target>native-code-nonstandard-structure</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

@@ -23,7 +23,6 @@ import com.simpligility.maven.plugins.androidndk.common.NativeHelper;
 import com.simpligility.maven.plugins.androidndk.configuration.AdditionallyBuiltModule;
 import com.simpligility.maven.plugins.androidndk.configuration.HeaderFilesDirective;
 import com.simpligility.maven.plugins.androidndk.configuration.ArchitectureToolchainMappings;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.archiver.MavenArchiveConfiguration;
 import org.apache.maven.archiver.MavenArchiver;
@@ -106,19 +105,15 @@ public class NdkBuildMojo extends AbstractMojo
     /**
      * <p>Folder containing native, static libraries compiled and linked by the NDK.</p>
      * <p/>
-     * The NDK build executable seems determined to create the native libs in the root folder.
-     * TODO work out how to create them in /target.
      */
-    @Parameter( property = "android.ndk.objectsOutputDirectory", defaultValue = "${project.basedir}/obj/local", readonly = true )
+    @Parameter( property = "android.ndk.objectsOutputDirectory", defaultValue = "${project.build.directory}/obj" )
     private File objectsOutputDirectory;
 
     /**
      * <p>Folder containing native, static libraries compiled and linked by the NDK.</p>
      * <p/>
-     * The NDK build executable seems determined to create the native libs in the root folder.
-     * TODO work out how to create them in /target.
      */
-    @Parameter( property = "android.ndk.librariesOutputDirectory", defaultValue = "${project.basedir}/libs", readonly = true )
+    @Parameter( property = "android.ndk.librariesOutputDirectory", defaultValue = "${project.build.directory}/ndk-libs" )
     private File librariesOutputDirectory;
 
     /**
@@ -264,15 +259,6 @@ public class NdkBuildMojo extends AbstractMojo
     @Parameter( property = "android.ndk.maxJobs", defaultValue = "false" )
     private Boolean maxJobs;
 
-
-    /**
-     * Flag indicating whether the NDK output directories (libs/&lt;architecture&gt; &amp; obj/...) should be cleared after build.
-     *
-     * @parameter default-value="false"
-     */
-    @Parameter( defaultValue = "false" )
-    private Boolean clearNativeArtifacts;
-
     /**
      *
      */
@@ -338,24 +324,17 @@ public class NdkBuildMojo extends AbstractMojo
 
         final String[] resolvedNDKArchitectures = NativeHelper.getNdkArchitectures( architectures, applicationMakefile, project.getBasedir() );
 
-        try
+        for ( String architecture : resolvedNDKArchitectures )
         {
-            for ( String architecture : resolvedNDKArchitectures )
+            try
             {
-                try
-                {
-                    compileForArchitecture( architecture );
-                }
-                catch ( Exception e )
-                {
-                    getLog().error( "Error while executing: " + e.getMessage() );
-                    throw new MojoExecutionException( e.getMessage(), e );
-                }
+                compileForArchitecture( architecture );
             }
-        }
-        finally
-        {
-            cleanupAfterBuild();
+            catch ( Exception e )
+            {
+                getLog().error( "Error while executing: " + e.getMessage() );
+                throw new MojoExecutionException( e.getMessage(), e );
+            }
         }
     }
 
@@ -435,6 +414,9 @@ public class NdkBuildMojo extends AbstractMojo
 
             configureAdditionalCommands( commands );
 
+            commands.add( "NDK_LIBS_OUT=" + librariesOutputDirectory.getAbsolutePath() );
+            commands.add( "NDK_OUT=" + objectsOutputDirectory.getAbsolutePath() );
+
             // If a build target is specified, tag that onto the command line as the very last of the parameters
             commands.add( target != null ? target : "all" );
 
@@ -478,32 +460,7 @@ public class NdkBuildMojo extends AbstractMojo
                 getLog().error( "Specified makefile " + makeFile + " does not exist" );
                 throw new MojoExecutionException( "Specified makefile " + makeFile + " does not exist" );
             }
-            commands.add( "-f" );
-            commands.add( makefile );
-        }
-    }
-
-    private void cleanupAfterBuild()
-    {
-        if ( clearNativeArtifacts )
-        {
-            try
-            {
-                FileUtils.deleteDirectory( librariesOutputDirectory );
-            }
-            catch ( IOException e )
-            {
-                getLog().warn( "Could not delete native build artifacts directory: " + e.getMessage(), e );
-            }
-            try
-            {
-                FileUtils.deleteDirectory( objectsOutputDirectory );
-            }
-            catch ( IOException e )
-            {
-                getLog().warn( "Could not delete native build artifacts directory: " + e.getMessage(), e );
-            }
-
+            commands.add( "APP_BUILD_SCRIPT=" + makefile );
         }
     }
 
@@ -584,23 +541,10 @@ public class NdkBuildMojo extends AbstractMojo
     private void processCompiledArtifacts( String architecture, final File makefileCaptureFile ) throws IOException, MojoExecutionException
     {
         // Where the NDK build creates the libs.
-        final File nativeLibOutputDirectory = new File( librariesOutputDirectory, architecture );
-        nativeLibOutputDirectory.mkdirs();
-
-        // Copy the built native libs into the packaging folder.
-        // We don't create them there to start with because the NDK build seems determined to create them in the root.
-        final File nativeLibraryDirectory = new File( buildDirectory, "/libs/" + architecture );
-        FileUtils.copyDirectory( nativeLibOutputDirectory, nativeLibraryDirectory );
+        final File nativeLibraryDirectory = new File( librariesOutputDirectory, architecture );
 
         // Where the NDK build creates the object files - static files end up here
-        final File nativeObjOutputDirectory = new File( objectsOutputDirectory, architecture );
-        nativeObjOutputDirectory.mkdirs();
-
-        // Copy the built native object files into the packaging folder.
-        // We don't create them there to start with because the NDK build seems determined to create them in the root.
-        final File nativeObjDirectory = new File( buildDirectory, "/obj/" + architecture );
-        FileUtils.copyDirectory( nativeObjOutputDirectory, nativeObjDirectory );
-
+        final File nativeObjDirectory = new File( new File( objectsOutputDirectory, "local" ), architecture );
 
         final List<String> classifiers = new ArrayList<String>();
         final File nativeArtifactFile;
@@ -865,9 +809,13 @@ public class NdkBuildMojo extends AbstractMojo
         {
             getLog().debug( "No header files included, will add default set" );
             final HeaderFilesDirective e = new HeaderFilesDirective();
-            e.setDirectory( new File( project.getBasedir() + "/jni" ).getAbsolutePath() );
-            e.setIncludes( new String[]{ "**/*.h" } );
-            finalHeaderFilesDirectives.add( e );
+            final File folder = new File( project.getBasedir() + "/jni" );
+            if ( folder.exists() )
+            {
+                e.setDirectory( folder.getAbsolutePath() );
+                e.setIncludes( new String[] { "**/*.h" } );
+                finalHeaderFilesDirectives.add( e );
+            }
         }
         createHeaderArchive( finalHeaderFilesDirectives, classifiers );
     }
