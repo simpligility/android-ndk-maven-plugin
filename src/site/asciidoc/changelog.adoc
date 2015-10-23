@@ -5,7 +5,12 @@ https://github.com/simpligility/android-ndk-maven-plugin/commits/master[git comm
 
 == 1.0.1 or higher - upcoming
 
-* your contributions could be here...
+* Fixed makefile parameter. build output directly into target folder instead of moving files
+** see https://github.com/simpligility/android-ndk-maven-plugin/pull/12
+** contributed by Marek Kedzierski https://github.com/kedzie
+* Added support for multi-native librararies aka multi-artifacts
+** see https://github.com/simpligility/android-ndk-maven-plugin/pull/11
+** contributed by https://github.com/lpalonek
 
 == 1.0.0 - released 2015-09-09
 
