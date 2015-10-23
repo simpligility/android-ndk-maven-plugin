@@ -272,6 +272,12 @@ public class NdkBuildMojo extends AbstractMojo
     private boolean skip;
 
     /**
+     * Flag indicating whether or not multiple number of native libraries should be included
+     */
+    @Parameter( defaultValue = "false" )
+    private boolean allowMultiArtifacts;
+
+    /**
      * The Jar archiver.
      */
     @Component( role = org.codehaus.plexus.archiver.Archiver.class, hint = "jar" )
@@ -547,22 +553,14 @@ public class NdkBuildMojo extends AbstractMojo
         final File nativeObjDirectory = new File( new File( objectsOutputDirectory, "local" ), architecture );
 
         final List<String> classifiers = new ArrayList<String>();
-        final File nativeArtifactFile;
-        if ( finalLibraryName == null )
+        if ( allowMultiArtifacts )
         {
-            nativeArtifactFile = findNativeLibrary( nativeLibraryDirectory, nativeObjDirectory );
+            attachManyArtifacts( nativeLibraryDirectory, architecture, nativeObjDirectory, classifiers );
         }
         else
         {
-            nativeArtifactFile = nativeLibraryFromName( nativeLibraryDirectory, nativeObjDirectory, finalLibraryName );
+            attachOneArtifact( nativeLibraryDirectory, architecture, nativeObjDirectory, classifiers );
         }
-
-        final String artifactType = resolveArtifactType( nativeArtifactFile );
-        getLog().debug( "Adding native compiled artifact: " + nativeArtifactFile );
-
-        final String actualClassifier = ( classifier == null ) ? architecture : architecture + "-" + classifier;
-        projectHelper.attachArtifact( this.project, artifactType, actualClassifier, nativeArtifactFile );
-        classifiers.add( actualClassifier );
 
         if ( additionallyBuiltModules != null && !additionallyBuiltModules.isEmpty() )
         {
@@ -594,10 +592,44 @@ public class NdkBuildMojo extends AbstractMojo
 
     }
 
+    private void attachManyArtifacts( File nativeLibraryDirectory, String architecture, File nativeObjDirectory, List<String> classifiers ) throws MojoExecutionException
+    {
+        List<File> artifacts = Arrays.asList( findNativeLibrary( nativeLibraryDirectory, nativeObjDirectory ) );
+        for ( File file : artifacts )
+        {
+            attachArtifactFile( architecture, classifiers, file );
+        }
+    }
+
+    private void attachOneArtifact( File nativeLibraryDirectory, String architecture, File nativeObjDirectory, List<String> classifiers ) throws MojoExecutionException
+    {
+        final File nativeArtifactFile;
+        if ( finalLibraryName == null )
+        {
+            nativeArtifactFile = findNativeLibrary( nativeLibraryDirectory, nativeObjDirectory )[0];
+        }
+        else
+        {
+            nativeArtifactFile = nativeLibraryFromName( nativeLibraryDirectory, nativeObjDirectory, finalLibraryName );
+        }
+
+        attachArtifactFile( architecture, classifiers, nativeArtifactFile );
+    }
+
+    private void attachArtifactFile( String architecture, List<String> classifiers, File nativeArtifactFile )
+    {
+        final String artifactType = resolveArtifactType( nativeArtifactFile );
+        getLog().debug( "Adding native compiled artifact: " + nativeArtifactFile );
+
+        final String actualClassifier = ( classifier == null ) ? architecture : architecture + "-" + classifier;
+        projectHelper.attachArtifact( this.project, artifactType, actualClassifier, nativeArtifactFile );
+        classifiers.add( actualClassifier );
+    }
+
     /**
      * Search the specified directory for native artifacts that match the artifact Id
      */
-    private File findNativeLibrary( File nativeLibDirectory, final File nativeObjDirectory ) throws MojoExecutionException
+    private File[] findNativeLibrary( File nativeLibDirectory, final File nativeObjDirectory ) throws MojoExecutionException
     {
         getLog().info( "Searching " + nativeLibDirectory + " for built shared library" );
         // FIXME: Should really just look for shared libraries in here really ....
@@ -656,7 +688,7 @@ public class NdkBuildMojo extends AbstractMojo
         }
 
         // slight limitation at this stage - we only handle a single .so artifact
-        if ( files == null || files.length != 1 )
+        if ( ( files == null || files.length != 1 )  && !allowMultiArtifacts )
         {
             getLog().warn( "Error while detecting native compile artifacts: " + ( files == null || files.length == 0 ? "None found" : "Found more than 1 artifact" ) );
             if ( target != null )
@@ -676,7 +708,7 @@ public class NdkBuildMojo extends AbstractMojo
                 throw new MojoExecutionException( "No native compiled library found, did the native compile complete successfully?" );
             }
         }
-        return files[ 0 ];
+        return files;
     }
 
     private File nativeLibraryFromName( File nativeLibDirectory, final File nativeObjDirectory, final String libraryName ) throws MojoExecutionException
