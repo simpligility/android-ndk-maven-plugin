@@ -645,14 +645,17 @@ public class NdkBuildMojo extends AbstractMojo
                 }
 
                 // FIXME: The following logic won't work for an APKLIB building a static library
-                if ( Const.ArtifactType.NATIVE_IMPLEMENTATION_ARCHIVE.equals( project.getPackaging() ) )
+                final String extension = Const.ArtifactType.NATIVE_IMPLEMENTATION_ARCHIVE.equals( project.getPackaging() ) ? ".a" : ".so";
+                boolean found = name.startsWith( "lib" + libraryName ) && name.endsWith( extension );
+                if ( !found )
                 {
-                    return name.startsWith( "lib" + libraryName ) && name.endsWith( ".a" );
+                    // Issue #14 : Work-around issue where the project is actually called "lib" something
+                    if ( libraryName.startsWith( "lib" ) )
+                    {
+                        found = name.startsWith( libraryName ) && name.endsWith( extension );
+                    }
                 }
-                else
-                {
-                    return name.startsWith( "lib" + libraryName ) && name.endsWith( ".so" );
-                }
+                return found;
             }
         } );
 
