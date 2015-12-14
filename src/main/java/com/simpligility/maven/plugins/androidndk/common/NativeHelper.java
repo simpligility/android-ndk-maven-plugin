@@ -384,4 +384,15 @@ public class NativeHelper
                 && ndkArchitecture.equals( extractArchitectureFromArtifact( artifact, defaultArchitecture ) );
     }
 
+    /** Checks whether or not the specified project provides a native library artifact as its primary artifact.
+     *
+     * @param mavenProject Project to check
+     * @return True if the packaging of the project is either "a" or "so" (both defining native artifacts).
+     */
+    public static boolean isNativeArtifactProject( MavenProject mavenProject )
+    {
+        final String packaging = mavenProject.getPackaging();
+        return Const.ArtifactType.NATIVE_IMPLEMENTATION_ARCHIVE.equals( packaging ) || Const.ArtifactType.NATIVE_SYMBOL_OBJECT.equals( packaging );
+    }
+
 }

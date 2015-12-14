@@ -146,6 +146,13 @@ public class NdkBuildMojo extends AbstractMojo
     private Boolean attachHeaderFiles;
 
     /**
+     * Flag indicating whether the final artifacts should be included and attached to the build as an artifact.
+     */
+    @Parameter( property = "android.ndk.attachLibrariesArtifacts", defaultValue = "true" )
+    private Boolean attachLibrariesArtifacts;
+
+
+    /**
      * Flag indicating whether the make files last LOCAL_SRC_INCLUDES should be used for determining what header
      * files to include.  Setting this flag to true, overrides any defined header files directives.
      * <strong>Note: </strong> By setting this flag to true, all header files used in the project will be
@@ -289,7 +296,7 @@ public class NdkBuildMojo extends AbstractMojo
     /**
      * The maven project.
      */
-    @Component
+    @Parameter( defaultValue = "${project}", readonly = true, required = true )
     protected MavenProject project;
 
     /**
@@ -320,6 +327,11 @@ public class NdkBuildMojo extends AbstractMojo
         {
             getLog().info( "Skipping execution as per configuration" );
             return;
+        }
+
+        if ( !attachLibrariesArtifacts && NativeHelper.isNativeArtifactProject( project ) )
+        {
+            getLog().warn( "Configured to not attach artifacts, this may cause an error at install/deploy time" );
         }
 
         // Validate the NDK
@@ -434,8 +446,15 @@ public class NdkBuildMojo extends AbstractMojo
             executor.executeCommand( ndkBuildPath, commands, buildDirectory, true );
             getLog().debug( "Executed NDK " + architecture + " make at : " + buildDirectory );
 
-            // Attempt to attach the native libraries (shared only)
-            processCompiledArtifacts( architecture, makefileCaptureFile );
+            if ( attachLibrariesArtifacts )
+            {
+                // Attempt to attach the native libraries (shared only)
+                processCompiledArtifacts( architecture, makefileCaptureFile );
+            }
+            else
+            {
+                getLog().info( "Will skip attaching compiled libraries as per configuration" );
+            }
 
         }
         finally
