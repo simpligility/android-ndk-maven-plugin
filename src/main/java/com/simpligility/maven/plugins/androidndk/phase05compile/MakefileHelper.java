@@ -40,13 +40,15 @@ public class MakefileHelper
      */
     public static class MakefileHolder
     {
+        boolean leaveTemporaryBuildArtifacts;
         String makeFile;
         List<File> includeDirectories;
 
-        public MakefileHolder( List<File> includeDirectories, String makeFile )
+        public MakefileHolder( List<File> includeDirectories, String makeFile, boolean leaveTemporaryBuildArtifacts )
         {
             this.includeDirectories = includeDirectories;
             this.makeFile = makeFile;
+            this.leaveTemporaryBuildArtifacts = leaveTemporaryBuildArtifacts;
         }
 
         public List<File> getIncludeDirectories()
@@ -57,6 +59,11 @@ public class MakefileHelper
         public String getMakeFile()
         {
             return makeFile;
+        }
+
+        public boolean isLeaveTemporaryBuildArtifacts()
+        {
+            return leaveTemporaryBuildArtifacts;
         }
     }
 
@@ -90,18 +97,20 @@ public class MakefileHelper
      */
     public static void cleanupAfterBuild( MakefileHolder makefileHolder )
     {
-
-        if ( makefileHolder.getIncludeDirectories() != null )
+        if ( !makefileHolder.isLeaveTemporaryBuildArtifacts() )
         {
-            for ( File file : makefileHolder.getIncludeDirectories() )
+            if ( makefileHolder.getIncludeDirectories() != null )
             {
-                try
+                for ( File file : makefileHolder.getIncludeDirectories() )
                 {
-                    FileUtils.deleteDirectory( file );
-                }
-                catch ( IOException e )
-                {
-                    e.printStackTrace();
+                    try
+                    {
+                        FileUtils.deleteDirectory( file );
+                    }
+                    catch ( IOException e )
+                    {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
@@ -116,7 +125,7 @@ public class MakefileHelper
      *                          the location where the header archive was expanded
      * @return The created Makefile
      */
-    public MakefileHolder createMakefileFromArtifacts( Set<Artifact> artifacts, String ndkArchitecture, String defaultNDKArchitecture, boolean useHeaderArchives )
+    public MakefileHolder createMakefileFromArtifacts( Set<Artifact> artifacts, String ndkArchitecture, String defaultNDKArchitecture, boolean useHeaderArchives, boolean leaveTemporaryBuildArtifacts )
             throws IOException, MojoExecutionException
     {
 
@@ -197,7 +206,12 @@ public class MakefileHelper
 
                         final File includeDir = new File( ndkBuildDirectory, "android_maven_plugin_native_includes" + System.currentTimeMillis() + "_"
                                 + harArtifact.getArtifactId() );
-                        includeDir.deleteOnExit();
+
+                        if ( !leaveTemporaryBuildArtifacts )
+                        {
+                            includeDir.deleteOnExit();
+                        }
+
                         includeDirectories.add( includeDir );
 
                         JarHelper.unjar( new JarFile( resolvedHarArtifactFile ), includeDir,
@@ -240,7 +254,7 @@ public class MakefileHelper
             }
         }
         
-        return new MakefileHolder( includeDirectories, makeFile.toString() );
+        return new MakefileHolder( includeDirectories, makeFile.toString(), leaveTemporaryBuildArtifacts );
     }
 
     private boolean addLibraryDetails( StringBuilder makeFile, Artifact artifact, String ndkArchitecture ) throws IOException

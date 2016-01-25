@@ -151,6 +151,11 @@ public class NdkBuildMojo extends AbstractMojo
     @Parameter( property = "android.ndk.attachLibrariesArtifacts", defaultValue = "true" )
     private Boolean attachLibrariesArtifacts;
 
+    /**
+     * Flag indicating whether temporary build artifacts are removed after a build
+     */
+    @Parameter( property = "android.ndk.leaveTemporaryBuildArtifacts", defaultValue = "false" )
+    private Boolean leaveTemporaryBuildArtifacts;
 
     /**
      * Flag indicating whether the make files last LOCAL_SRC_INCLUDES should be used for determining what header
@@ -382,7 +387,7 @@ public class NdkBuildMojo extends AbstractMojo
 
             final File androidMavenMakefile = new File( buildFolder, "android_maven_plugin_makefile.mk" );
             final MakefileHelper makefileHelper = new MakefileHelper( getLog(), getArtifactResolverHelper(), harArtifactHandler, null, buildDirectory );
-            makefileHolder = makefileHelper.createMakefileFromArtifacts( resolvedNativeLibraryArtifacts, architecture, "armeabi", useHeaderArchives );
+            makefileHolder = makefileHelper.createMakefileFromArtifacts( resolvedNativeLibraryArtifacts, architecture, "armeabi", useHeaderArchives, leaveTemporaryBuildArtifacts );
 
             final FileOutputStream output = new FileOutputStream( androidMavenMakefile );
             try
@@ -403,7 +408,12 @@ public class NdkBuildMojo extends AbstractMojo
             // things like header files, flags etc.  It is processed after the build to retrieve the headers
             // and also capture flags etc ...
             final File makefileCaptureFile = File.createTempFile( "android_maven_plugin_makefile_captures", ".tmp" , buildDirectory );
-            makefileCaptureFile.deleteOnExit();
+
+            if ( !leaveTemporaryBuildArtifacts )
+            {
+                makefileCaptureFile.deleteOnExit();
+            }
+
             executor.addEnvironment( MakefileHelper.MAKEFILE_CAPTURE_FILE, makefileCaptureFile.getAbsolutePath() );
 
             // Add any defined system properties
