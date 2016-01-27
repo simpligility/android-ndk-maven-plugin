@@ -57,7 +57,7 @@
         <plugin>
           <groupId>com.simpligility.maven.plugins</groupId>
           <artifactId>android-ndk-maven-plugin</artifactId>
-          <version>1.0.1-SNAPSHOT</version>
+          <version>${it-plugin.version}</version>
           <configuration>
             <architectures>x86 armeabi armeabi-v7a mips</architectures>
             <!-- To override the toolchains for each architecture, specify a mapping as shown below-->
