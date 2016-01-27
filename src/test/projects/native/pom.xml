@@ -23,6 +23,7 @@
     <module>native-code-two-executions</module>
     <module>native-code-nonstandard-structure</module>
     <module>native-apklib</module>
+    <module>native-aar</module>
     <module>mixed-java-native-with-apklib-dependency</module>
     <!--
       <module>transient-apklib-with-native</module>
