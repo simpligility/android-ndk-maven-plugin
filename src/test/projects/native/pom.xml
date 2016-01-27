@@ -4,7 +4,7 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.simpligility.maven.plugins.samples</groupId>
+  <groupId>com.simpligility.maven.plugins.ndk.samples</groupId>
   <artifactId>native-parent</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -19,19 +19,12 @@
     <module>native-code</module>
     <module>native-static-lib</module>
     <module>native-code-including-static-lib</module>
-    <module>java-with-native-library</module>
-    <module>java-with-native-dependency</module>
-    <module>java-with-native-statically-linked-dependency</module>
-    <module>java-with-native-dependency-x86-only</module>
     <module>mixed-java-native-code</module>
     <module>native-code-two-executions</module>
     <module>native-code-nonstandard-structure</module>
+    <module>native-apklib</module>
+    <module>mixed-java-native-with-apklib-dependency</module>
     <!--
-      <module>java-transient-dependency</module>
-      <module>mixed-java-native-code</module>
-      <module>native-apklib</module>
-      <module>java-with-native-apklib-dependency</module>
-      <module>mixed-java-native-with-apklib-dependency</module>
       <module>transient-apklib-with-native</module>
     -->
 
@@ -54,15 +47,18 @@
         <plugin>
           <groupId>com.simpligility.maven.plugins</groupId>
           <artifactId>android-maven-plugin</artifactId>
-          <version>4.0.0</version>
+          <version>4.3.0</version>
           <extensions>true</extensions>
+          <configuration>
+            <ndkArchitectures>x86 armeabi armeabi-v7a mips</ndkArchitectures>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>com.simpligility.maven.plugins</groupId>
           <artifactId>android-ndk-maven-plugin</artifactId>
-          <version>${it-plugin.version}</version>
+          <version>1.0.1-SNAPSHOT</version>
           <configuration>
-            <architectures>x86 armeabi armeabi-v7a</architectures>
+            <architectures>x86 armeabi armeabi-v7a mips</architectures>
             <!-- To override the toolchains for each architecture, specify a mapping as shown below-->
             <additionalCommandline>V=1 -B</additionalCommandline>
           </configuration>

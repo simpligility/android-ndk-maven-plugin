@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.simpligility.maven.plugins.samples</groupId>
+    <groupId>com.simpligility.maven.plugins.ndk.samples</groupId>
     <artifactId>native-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
@@ -36,9 +36,6 @@
             <goals>
               <goal>ndk-build</goal>
             </goals>
-            <configuration>
-              <clearNativeArtifacts>true</clearNativeArtifacts>
-            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -48,7 +45,7 @@
         <artifactId>android-maven-plugin</artifactId>
         <extensions>true</extensions>
         <configuration>
-          <ndkOutputDirectory>${project.build.directory}/android-ndk-maven-plugin/libs/</ndkOutputDirectory>
+
         </configuration>
       </plugin>
 

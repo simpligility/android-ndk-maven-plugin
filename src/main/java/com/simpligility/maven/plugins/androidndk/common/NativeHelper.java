@@ -19,6 +19,7 @@ import org.apache.maven.shared.dependency.graph.traversal.CollectingDependencyNo
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -47,8 +48,7 @@ public class NativeHelper
         this.log = log;
     }
 
-    public static boolean hasStaticNativeLibraryArtifact( Set<Artifact> resolveNativeLibraryArtifacts,
-                                                          String ndkArchitecture )
+    public static boolean hasStaticNativeLibraryArtifact ( Set<Artifact> resolveNativeLibraryArtifacts )
     {
         for ( Artifact resolveNativeLibraryArtifact : resolveNativeLibraryArtifacts )
         {
@@ -60,8 +60,7 @@ public class NativeHelper
         return false;
     }
 
-    public static boolean hasSharedNativeLibraryArtifact( Set<Artifact> resolveNativeLibraryArtifacts,
-                                                          String ndkArchitecture )
+    public static boolean hasSharedNativeLibraryArtifact ( Set<Artifact> resolveNativeLibraryArtifacts )
     {
         for ( Artifact resolveNativeLibraryArtifact : resolveNativeLibraryArtifacts )
         {
@@ -111,6 +110,22 @@ public class NativeHelper
                 {
                     log.debug( "Including attached artifact: " + artifact + ". Artifact scope is Compile or Runtime." );
                     filteredArtifacts.add( artifact );
+                }
+                else
+                {
+                    final String type = artifact.getType();
+
+                    // FIXME: These *may* contain native libraries - for now we simply add the to the list
+                    // FIXME: of artifacts and whether or not they are used is determined in the MakefileHelper
+                    // FIXME: when the makefile is generated - should really be done here but alas for now
+                    if ( AndroidExtension.APKLIB.equals( type ) || AndroidExtension.AAR.equals( type ) )
+                    {
+                        filteredArtifacts.add( artifact );
+                    }
+                    else
+                    {
+                        // Not checking any other types for now ...
+                    }
                 }
             }
         }
@@ -394,5 +409,24 @@ public class NativeHelper
         final String packaging = mavenProject.getPackaging();
         return Const.ArtifactType.NATIVE_IMPLEMENTATION_ARCHIVE.equals( packaging ) || Const.ArtifactType.NATIVE_SYMBOL_OBJECT.equals( packaging );
     }
+
+    public static File[] listNativeFiles( Artifact artifact, File unpackDirectory, final boolean staticLibrary, final String architecture )
+    {
+        final List<File> acceptedFiles = new ArrayList<File> (  );
+        File libsFolder = new File( unpackDirectory, architecture );
+        if ( libsFolder.exists () )
+        {
+            // list all the files
+            return libsFolder.listFiles( new FilenameFilter ()
+            {
+                public boolean accept( final File dir, final String name )
+                {
+                    return name.startsWith( "lib" ) && name.endsWith( ( staticLibrary ? ".a" : ".so" ) );
+                }
+            } );
+        }
+        return new File[0];
+    }
+
 
 }
