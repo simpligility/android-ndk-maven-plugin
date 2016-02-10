@@ -36,7 +36,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.api.version>3.0.5</maven.api.version>
 
-    <takari.test.version>2.4.0</takari.test.version>
+    <takari.test.version>2.8.0</takari.test.version>
 
     <easymock.version>3.4</easymock.version>
     <powermock.version>1.6.4</powermock.version>
