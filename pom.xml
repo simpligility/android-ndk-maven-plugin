@@ -687,31 +687,5 @@
         </plugins>
       </build>
     </profile>
-    <profile>
-      <id>site</id>
-      <build>
-        <plugins>
-          <plugin>
-<!--             deploy the site to github pages -->
-<!--  this plugin needs access to dependencies from https://repo.eclipse.org/content/repositories/egit-releases/  -->
-            <groupId>com.github.github</groupId>
-            <artifactId>site-maven-plugin</artifactId>
-            <configuration>
-              <server>github</server>
-              <message>Creating site for ${project.version}</message>
-            </configuration>
-            <executions>
-              <execution>
-                <phase>site</phase>
-                <goals>
-<!--                 the site goal uploads to ghpages -->
-                  <goal>site</goal> 
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
   </profiles>
 </project>
