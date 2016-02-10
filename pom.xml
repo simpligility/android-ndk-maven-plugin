@@ -27,7 +27,7 @@
   <name>Android NDK Maven Plugin - android-ndk-maven-plugin</name>
   <description>Maven Plugin for Android Development with the NDK</description>
 
-  <url>https://github.com/simpligility/android-ndk-maven-plugin</url>
+  <url>http://simpligility.github.io/android-ndk-maven-plugin/</url>
   <inceptionYear>2014</inceptionYear>
 
   <properties>
