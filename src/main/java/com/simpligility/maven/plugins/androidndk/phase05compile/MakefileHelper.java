@@ -292,11 +292,14 @@ public class MakefileHelper
             return false;
         }
 
-        for ( IgnoreHeaderFilesArchive directive : ignoreHeaderFilesArchives )
+        if ( ignoreHeaderFilesArchives != null )
         {
-            if ( directive.getGroupId ().equals ( artifact.getGroupId () ) && directive.getArtifactId ().equals ( artifact.getArtifactId () ) )
+            for ( IgnoreHeaderFilesArchive directive : ignoreHeaderFilesArchives )
             {
-                return false;
+                if ( directive.getGroupId ().equals ( artifact.getGroupId () ) && directive.getArtifactId ().equals ( artifact.getArtifactId () ) )
+                {
+                    return false;
+                }
             }
         }
         return true;
