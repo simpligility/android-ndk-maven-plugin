@@ -13,6 +13,11 @@ https://github.com/simpligility/android-ndk-maven-plugin/commits/master[git comm
 ** contributed by https://github.com/lpalonek
 * A lot of project dependency, plugin and relatd config updates
 ** contributed by Manfred Moser http://simpligility.com
+* Added support for header archive exclusion
+** see https://github.com/simpligility/android-ndk-maven-plugin/pull/16
+** contributed by https://github.com/johanlindquist
+* Fixed APK lib / AAR support
+** contributed by https://github.com/johanlindquist
 
 == 1.0.0 - released 2015-09-09
 
