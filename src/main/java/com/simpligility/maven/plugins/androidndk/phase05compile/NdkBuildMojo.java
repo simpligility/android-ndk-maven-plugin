@@ -22,6 +22,7 @@ import com.simpligility.maven.plugins.androidndk.common.NativeHelper;
 import com.simpligility.maven.plugins.androidndk.configuration.AdditionallyBuiltModule;
 import com.simpligility.maven.plugins.androidndk.configuration.HeaderFilesDirective;
 import com.simpligility.maven.plugins.androidndk.configuration.ArchitectureToolchainMappings;
+import com.simpligility.maven.plugins.androidndk.configuration.IgnoreHeaderFilesArchive;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.archiver.MavenArchiveConfiguration;
 import org.apache.maven.archiver.MavenArchiver;
@@ -205,7 +206,6 @@ public class NdkBuildMojo extends AbstractMojo
      * </pre>
      */
     @Parameter
-
     private List<HeaderFilesDirective> headerFilesDirectives;
 
     /**
@@ -214,6 +214,27 @@ public class NdkBuildMojo extends AbstractMojo
      */
     @Parameter( property = "android.ndk.build.use-header-archive", defaultValue = "true" )
     private Boolean useHeaderArchives;
+
+    /** Specifies a set of group/artifact identifiers for which header archives should not be attempted to be resolved.
+     * This is useful when a static library dependcy on other static libraries but the headers of those libraries are not necessarily
+     * available.  This allows the plugin to exclude the retrieval of those header archives
+     * <p/>
+     * <pre>
+     *   &lt;ignoreHeaderFilesArchives&gt;
+     *     &lt;ignoreHeaderFilesArchive&gt;
+     *       &lt;groupId&gt;com.insidesecure.drm.agent.android&lt;/groupId&gt;
+     *       &lt;artifactId&gt;expat-static-lib&lt;/artifactId&gt;
+     *     &lt;/ignoreHeaderFilesArchive&gt;
+     *     &lt;ignoreHeaderFilesArchive&gt;
+     *       &lt;groupId&gt;com.insidesecure.drm.agent.android&lt;/groupId&gt;
+     *       &lt;artifactId&gt;pcre-static-&lt;/artifactId&gt;
+     *     &lt;/ignoreHeaderFilesArchive&gt;
+     *   &lt;/ignoreHeaderFilesArchives&gt;
+     * </pre>
+     *
+     */
+    @Parameter
+    private List<IgnoreHeaderFilesArchive> ignoreHeaderFilesArchives;
 
     /**
      * Defines additional system properties which should be exported to the ndk-build script.  This
@@ -416,6 +437,7 @@ public class NdkBuildMojo extends AbstractMojo
             makefileRequest.artifacts = resolvedNativeLibraryArtifacts;
             makefileRequest.defaultNDKArchitecture = "armeabi";
             makefileRequest.useHeaderArchives = useHeaderArchives;
+            makefileRequest.ignoreHeaderFilesArchives = ignoreHeaderFilesArchives;
             makefileRequest.leaveTemporaryBuildArtifacts = leaveTemporaryBuildArtifacts;
             makefileRequest.architectures = compileCommand.getResolvedArchitectures ();
 

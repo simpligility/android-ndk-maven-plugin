@@ -7,6 +7,7 @@ import com.simpligility.maven.plugins.androidndk.common.JarHelper;
 import com.simpligility.maven.plugins.androidndk.common.MavenToPlexusLogAdapter;
 import com.simpligility.maven.plugins.androidndk.common.NativeHelper;
 import com.simpligility.maven.plugins.androidndk.common.UnpackedLibHelper;
+import com.simpligility.maven.plugins.androidndk.configuration.IgnoreHeaderFilesArchive;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
@@ -41,6 +42,7 @@ public class MakefileHelper
         boolean useHeaderArchives;
         boolean leaveTemporaryBuildArtifacts;
         String[] architectures;
+        List<IgnoreHeaderFilesArchive> ignoreHeaderFilesArchives;
     }
 
 
@@ -252,7 +254,7 @@ public class MakefileHelper
                     libraryDetails.localModule = artifact.getArtifactId ();
                     libraryDetails.libraryPath = artifact.getFile ();
 
-                    libraryDetails.useHeaderArchives = makefileRequest.useHeaderArchives;
+                    libraryDetails.useHeaderArchives = useHeaderArchives( artifact, makefileRequest.useHeaderArchives, makefileRequest.ignoreHeaderFilesArchives );
                     libraryDetails.leaveTemporaryBuildArtifacts = makefileRequest.leaveTemporaryBuildArtifacts;
 
                     libraryDetails.includeDirectories = includeDirectories;
@@ -281,6 +283,23 @@ public class MakefileHelper
             }
         }
         return makefileResponse;
+    }
+
+    private boolean useHeaderArchives ( final Artifact artifact, final boolean useHeaderArchives, final List<IgnoreHeaderFilesArchive> ignoreHeaderFilesArchives )
+    {
+        if ( !useHeaderArchives )
+        {
+            return false;
+        }
+
+        for ( IgnoreHeaderFilesArchive directive : ignoreHeaderFilesArchives )
+        {
+            if ( directive.getGroupId ().equals ( artifact.getGroupId () ) && directive.getArtifactId ().equals ( artifact.getArtifactId () ) )
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
 
