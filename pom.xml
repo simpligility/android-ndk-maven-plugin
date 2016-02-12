@@ -358,8 +358,7 @@
           <autoVersionSubmodules>true</autoVersionSubmodules>
           <useReleaseProfile>false</useReleaseProfile>
           <arguments>-Pofficial-release</arguments>
-          <!-- only site since the ghpages are deployed in that phase -->
-          <goals>plugin:report deploy site</goals>
+          <goals>plugin:report deploy site-deploy</goals>
         </configuration>
       </plugin>
 
