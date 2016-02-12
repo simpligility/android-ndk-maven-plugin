@@ -3,7 +3,9 @@
 Detailed changes can be seen in the 
 https://github.com/simpligility/android-ndk-maven-plugin/commits/master[git commit log]. 
 
-== 1.0.1 or higher - upcoming
+== 1.1.1 or higher - upcoming
+
+== 1.1.0 - released 2016-02-12
 
 * Fixed makefile parameter. build output directly into target folder instead of moving files
 ** see https://github.com/simpligility/android-ndk-maven-plugin/pull/12
@@ -18,6 +20,8 @@ https://github.com/simpligility/android-ndk-maven-plugin/commits/master[git comm
 ** contributed by https://github.com/johanlindquist
 * Fixed APK lib / AAR support
 ** contributed by https://github.com/johanlindquist
+
+Release performed by Manfred Moser http://simpligility.com
 
 == 1.0.0 - released 2015-09-09
 
@@ -37,6 +41,8 @@ https://github.com/simpligility/android-ndk-maven-plugin/commits/master[git comm
 * Updated Travis CI config to use Android support
 ** contributed by Manfred Moser http://simpligility.com
 
+Release performed by Manfred Moser http://simpligility.com
+
 == 0.1.0 - released 2014-10-28
 
 * Initial port of NDK features from Android Maven plugin including config adaptations and improvements
@@ -44,3 +50,4 @@ https://github.com/simpligility/android-ndk-maven-plugin/commits/master[git comm
 * initial project setup, pom and further config for release, deployment and more
 ** contributed by Manfred Moser http://simpligility.com
 
+Release performed by Manfred Moser http://simpligility.com
