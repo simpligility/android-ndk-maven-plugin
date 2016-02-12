@@ -120,61 +120,15 @@
   </prerequisites>
 
   <dependencies>
-      <!--  managed since its transitive from SDK and others -->
-      <dependency>
-        <groupId>org.ow2.asm</groupId>
-        <artifactId>asm</artifactId>
-        <version>${asm.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.ow2.asm</groupId>
-        <artifactId>asm-tree</artifactId>
-        <version>${asm.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.ow2.asm</groupId>
-        <artifactId>asm-analysis</artifactId>
-        <version>${asm.version}</version>
-      </dependency>
- 
     <dependency>
       <groupId>com.android.tools</groupId>
       <artifactId>common</artifactId>
       <version>${android.tools.version}</version>
     </dependency>
-    <dependency>
-      <groupId>com.android.tools</groupId>
-      <artifactId>dvlib</artifactId>
-      <version>${android.tools.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.android.tools</groupId>
-      <artifactId>sdk-common</artifactId>
-      <version>${android.tools.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.android.tools</groupId>
-      <artifactId>sdklib</artifactId>
-      <version>${android.tools.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.android.tools.build</groupId>
-      <artifactId>builder</artifactId>
-      <version>${android.builder.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.android.tools.build</groupId>
-      <artifactId>manifest-merger</artifactId>
-      <version>${android.tools.version}</version>
-    </dependency>
+
     <dependency>
       <groupId>com.android.tools.ddms</groupId>
       <artifactId>ddmlib</artifactId>
-      <version>${android.tools.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.android.tools.layoutlib</groupId>
-      <artifactId>layoutlib-api</artifactId>
       <version>${android.tools.version}</version>
     </dependency>
 
