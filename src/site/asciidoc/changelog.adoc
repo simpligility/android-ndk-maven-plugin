@@ -11,7 +11,7 @@ https://github.com/simpligility/android-ndk-maven-plugin/commits/master[git comm
 * Added support for multi-native librararies aka multi-artifacts
 ** see https://github.com/simpligility/android-ndk-maven-plugin/pull/11
 ** contributed by https://github.com/lpalonek
-* A lot of project dependency, plugin and relatd config updates
+* A lot of project dependency, plugin and related config updates
 ** contributed by Manfred Moser http://simpligility.com
 * Added support for header archive exclusion
 ** see https://github.com/simpligility/android-ndk-maven-plugin/pull/16
