@@ -353,10 +353,11 @@ public class NativeHelper
      */
     public static String[] getNdkArchitectures( final String ndkArchitectures, final String applicationMakefile, final File basedir ) throws MojoExecutionException
     {
+        String[] resolvedArchitectures = new String[]{ "armeabi" };
         // if there is a specified ndk architecture, return it
         if ( ndkArchitectures != null )
         {
-            return ndkArchitectures.split( " " );
+            resolvedArchitectures = ndkArchitectures.split( " " );
         }
 
         // if there is no application makefile specified, let's use the default one
@@ -373,12 +374,19 @@ public class NativeHelper
             String[] foundNdkArchitectures = getAppAbi( appMK );
             if ( foundNdkArchitectures != null )
             {
-                return foundNdkArchitectures;
+                resolvedArchitectures = foundNdkArchitectures;
             }
         }
 
+        String[] processedResolvedArchitectures = new String[resolvedArchitectures.length];
+
+        for ( int i = 0; i < resolvedArchitectures.length; i++ )
+        {
+            processedResolvedArchitectures[ i ] = resolvedArchitectures[ i ].trim ();
+        }
+
         // return a default ndk architecture
-        return new String[]{ "armeabi" };
+        return processedResolvedArchitectures;
     }
 
     /**

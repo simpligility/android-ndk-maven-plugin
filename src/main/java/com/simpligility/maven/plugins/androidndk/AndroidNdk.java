@@ -41,27 +41,31 @@ public class AndroidNdk
     /**
      * Arm toolchain implementations.
      */
-    public static final String[] ARM_TOOLCHAIN = { "arm-linux-androideabi-4.9", "arm-linux-androideabi-4.8", "arm-linux-androideabi-4.7", "arm-linux-androideabi-4.6", "arm-linux-androideabi-4.4.3" };
+    public static final String[] ARM_TOOLCHAIN = { "arm-linux-androideabi-4.9", "arm-linux-androideabi-4.8", "arm-linux-androideabi-4.7", "arm-linux-androideabi-4.6",
+            "arm-linux-androideabi-4.4.3", "arm-linux-androidabi-clang3.5", "arm-linux-androidabi-clang3.6" };
 
     /**
      * ARM 64-bit toolchain implementations.
      */
-    public static final String[] ARM_64_TOOLCHAIN = { "aarch64-linux-android-4.9" };
+    public static final String[] ARM_64_TOOLCHAIN = { "aarch64-linux-android-4.9", "aarch64-linux-android-clang3.5", "aarch64-linux-android-clang3.6" };
 
     /**
      * x86 toolchain implementations.
      */
-    public static final String[] X86_TOOLCHAIN = { "x86-4.9", "x86-4.8", "x86-4.7", "x86-4.6", "x86-4.4.3" };
+    public static final String[] X86_TOOLCHAIN = { "x86-4.9", "x86-4.8", "x86-4.7", "x86-4.6", "x86-4.4.3", "x86-clang3.5", "x86-clang3.6" };
 
     /**
      * x86 64-bit toolchain implementations.
      */
-    public static final String[] X86_64_TOOLCHAIN = { "x86_64-4.9" };
+    public static final String[] X86_64_TOOLCHAIN = { "x86_64-4.9", "x86_64-clang3.5", "x86_64-clang3.6" };
 
     /**
      * Mips toolchain implementations.
      */
-    public static final String[] MIPS_TOOLCHAIN = { "mipsel-linux-android-4.9", "mipsel-linux-android-4.8", "mipsel-linux-android-4.7", "mipsel-linux-android-4.6", "mipsel-linux-android-4.4.3" };
+    public static final String[] MIPS_TOOLCHAIN = { "mipsel-linux-android-4.9", "mipsel-linux-android-4.8", "mipsel-linux-android-4.7", "mipsel-linux-android-4.6", "mipsel-linux-android-4.4.3",
+            "mipsel-linux-android-clang3.5", "mipsel-linux-android-clang3.6" };
+
+    public static final String[] MIPS_64_TOOLCHAIN = { "mips64el-linux-android-4.9", "mips64el-linux-android-clang3.5", "mips64el-linux-android-clang3.6" };
 
     /**
      * Possible locations for the gdbserver file.
@@ -93,109 +97,6 @@ public class AndroidNdk
                     "Path \"" + path + "\" is not a directory. " + PROPER_NDK_HOME_DIRECTORY_MESSAGE );
         }
     }
-/*
-
-    private File findStripper( String toolchain )
-    {
-        List<String> osDirectories = new ArrayList<String>();
-        String extension = "";
-
-        if ( SystemUtils.IS_OS_LINUX )
-        {
-            osDirectories.add( "linux-x86" );
-            osDirectories.add( "linux-x86_64" );
-        }
-        else if ( SystemUtils.IS_OS_WINDOWS )
-        {
-            osDirectories.add( "windows" );
-            osDirectories.add( "windows-x86_64" );
-            extension = ".exe";
-        }
-        else if ( SystemUtils.IS_OS_MAC || SystemUtils.IS_OS_MAC_OSX )
-        {
-            osDirectories.add( "darwin-x86" );
-            osDirectories.add( "darwin-x86_64" );
-        }
-
-        String fileName = "";
-        if ( toolchain.startsWith( "arm" ) )
-        {
-            fileName = "arm-linux-androideabi-strip" + extension;
-        }
-        else if ( toolchain.startsWith( "x86" ) )
-        {
-            fileName = "i686-linux-android-strip" + extension;
-        }
-        else if ( toolchain.startsWith( "mips" ) )
-        {
-            fileName = "mipsel-linux-android-strip" + extension;
-        }
-
-        for ( String osDirectory : osDirectories )
-        {
-            String stripperLocation =
-                    String.format( "toolchains/%s/prebuilt/%s/bin/%s", toolchain, osDirectory, fileName );
-            final File stripper = new File( ndkPath, stripperLocation );
-            if ( stripper.exists() )
-            {
-                return stripper;
-            }
-        }
-        return null;
-    }
-
-    private String resolveNdkToolchain( String[] toolchains )
-    {
-        for ( String toolchain : toolchains )
-        {
-            File f = findStripper( toolchain );
-            if ( f != null && f.exists() )
-            {
-                return toolchain;
-            }
-        }
-        return null;
-    }
-*/
-
-/*
-    */
-/**
-     * Tries to resolve the toolchain based on the path of the file.
-     *
-     * @param file Native library
-     * @return String
-     * @throws MojoExecutionException When no toolchain is found
-     *//*
-
-    public String getToolchain( File file ) throws MojoExecutionException
-    {
-        String resolvedNdkToolchain = null;
-
-        // try to resolve the toolchain now
-        String ndkArchitecture = file.getParentFile().getName();
-        if ( ndkArchitecture.startsWith( "arm" ) )
-        {
-            resolvedNdkToolchain = resolveNdkToolchain( ARM_TOOLCHAIN );
-        }
-        else if ( ndkArchitecture.startsWith( "x86" ) )
-        {
-            resolvedNdkToolchain = resolveNdkToolchain( X86_TOOLCHAIN );
-        }
-        else if ( ndkArchitecture.startsWith( "mips" ) )
-        {
-            resolvedNdkToolchain = resolveNdkToolchain( MIPS_TOOLCHAIN );
-        }
-
-        // if no toolchain can be found
-        if ( resolvedNdkToolchain == null )
-        {
-            throw new MojoExecutionException(
-                    "Can not resolve automatically a toolchain to use. Please specify one." );
-        }
-        return resolvedNdkToolchain;
-    }
-*/
 
     /**
      * Returns the complete path for the ndk-build tool, based on this NDK.
@@ -218,10 +119,21 @@ public class AndroidNdk
     {
         // create a list of possible gdb server parent folder locations
         List<String> gdbServerLocations = new ArrayList<String>();
-        if ( ndkArchitecture.startsWith( "arm" ) )
+        if ( ndkArchitecture.startsWith( "arm64-v8a" ) )
+        {
+            gdbServerLocations.add( "android-arm64" );
+            gdbServerLocations.addAll( Arrays.asList( ARM_64_TOOLCHAIN ) );
+        }
+        else if ( ndkArchitecture.startsWith( "arm" ) )
         {
             gdbServerLocations.add( "android-arm" );
             gdbServerLocations.addAll( Arrays.asList( ARM_TOOLCHAIN ) );
+        }
+        // x86_64 is before x86!
+        else if ( ndkArchitecture.startsWith( "x86_64" ) )
+        {
+            gdbServerLocations.add( "android-x86_64" );
+            gdbServerLocations.addAll( Arrays.asList( X86_TOOLCHAIN ) );
         }
         else if ( ndkArchitecture.startsWith( "x86" ) )
         {
@@ -265,7 +177,16 @@ public class AndroidNdk
      */
     public String getToolchainFromArchitecture( final String ndkArchitecture, final ArchitectureToolchainMappings architectureToolchainMappings ) throws MojoExecutionException
     {
-        if ( ndkArchitecture.startsWith( "arm" ) )
+        // arm64 is before arm!
+        if ( ndkArchitecture.startsWith( "arm64-v8a" ) )
+        {
+            if ( architectureToolchainMappings != null )
+            {
+                return architectureToolchainMappings.getArm64 ();
+            }
+            return findHighestSupportedToolchain( AndroidNdk.ARM_64_TOOLCHAIN );
+        }
+        else if ( ndkArchitecture.startsWith( "arm" ) )
         {
             if ( architectureToolchainMappings != null )
             {
@@ -273,19 +194,12 @@ public class AndroidNdk
             }
             return findHighestSupportedToolchain( AndroidNdk.ARM_TOOLCHAIN );
         }
-        else if ( ndkArchitecture.startsWith( "aarch64" ) )
-        {
-            if ( architectureToolchainMappings != null )
-            {
-                // return ndkArchitectureToolchainMappings.getX86();
-            }
-            return findHighestSupportedToolchain( AndroidNdk.ARM_64_TOOLCHAIN );
-        }
+        // x86_64 is before x86!
         else if ( ndkArchitecture.startsWith( "x86_64" ) )
         {
             if ( architectureToolchainMappings != null )
             {
-                // return ndkArchitectureToolchainMappings.getX86();
+                return architectureToolchainMappings.getX8664 ();
             }
             return findHighestSupportedToolchain( AndroidNdk.X86_64_TOOLCHAIN );
         }

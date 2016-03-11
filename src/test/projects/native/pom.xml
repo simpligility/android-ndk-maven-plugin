@@ -51,7 +51,7 @@
           <version>4.4.1</version>
           <extensions>true</extensions>
           <configuration>
-            <ndkArchitectures>x86 armeabi armeabi-v7a mips</ndkArchitectures>
+            <ndkArchitectures>x86 armeabi armeabi-v7a mips arm64-v8a</ndkArchitectures>
           </configuration>
         </plugin>
         <plugin>
