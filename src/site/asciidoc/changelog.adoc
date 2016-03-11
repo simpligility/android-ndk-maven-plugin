@@ -5,6 +5,11 @@ https://github.com/simpligility/android-ndk-maven-plugin/commits/master[git comm
 
 == 1.1.1 or higher - upcoming
 
+* Cleanup the various toolchain mappings
+** Contributed by https://github.com/johanlindquist
+* Fixed issue whereby NDK architecture names are used even if they contain spaces
+** Contributed by https://github.com/johanlindquist
+
 == 1.1.0 - released 2016-02-12
 
 * Fixed makefile parameter. build output directly into target folder instead of moving files
