@@ -403,7 +403,15 @@ public class NdkBuildMojo extends AbstractMojo
         compileCommand.librariesOutputDirectory = librariesOutputDirectory;
         compileCommand.objectsOutputDirectory = objectsOutputDirectory;
 
-        if ( ! "default-ndk-build".equals( execution.getExecutionId () ) )
+        // This indicates that the build is either the default build (by extension)
+        // or an execution within an (for example) APKLIB build.
+        // The execution can currently not be named since it would differ
+        // for APKLIB once that is executed.
+        //
+        // TODO: Once the AAR/APKLIB can pull the attached artifacts from the
+        // TODO: Maven session, this can be sorted out better.
+        //
+        if ( ! "default-ndk-build".equals( execution.getExecutionId () ) && ! "default".equals ( execution.getExecutionId () ) )
         {
             String libsOut = librariesOutputDirectory.getAbsolutePath();
             String out = objectsOutputDirectory.getAbsolutePath();

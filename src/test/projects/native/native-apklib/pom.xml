@@ -22,7 +22,6 @@
         <artifactId>android-ndk-maven-plugin</artifactId>
         <executions>
           <execution>
-            <id>build-native-library</id>
             <phase>compile</phase>
             <goals>
               <goal>ndk-build</goal>
