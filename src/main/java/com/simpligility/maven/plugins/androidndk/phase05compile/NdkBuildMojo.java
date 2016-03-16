@@ -349,6 +349,12 @@ public class NdkBuildMojo extends AbstractMojo
     private NativeHelper nativeHelper;
 
     /**
+     * @parameter expression="${mojoExecution}"
+     */
+    @Component
+    private org.apache.maven.plugin.MojoExecution execution;
+
+    /**
      * @throws MojoExecutionException
      * @throws MojoFailureException
      */
@@ -386,12 +392,39 @@ public class NdkBuildMojo extends AbstractMojo
         compileCommand.nativeLibraryDepedencies = resolvedNativeLibraryArtifacts;
         compileCommand.resolvedArchitectures = resolvedNDKArchitectures;
 
+        setupOutputDirectories( compileCommand );
+
         compile ( compileCommand );
+
+    }
+
+    private void setupOutputDirectories ( final CompileCommand compileCommand )
+    {
+        compileCommand.librariesOutputDirectory = librariesOutputDirectory;
+        compileCommand.objectsOutputDirectory = objectsOutputDirectory;
+
+        if ( ! "default-ndk-build".equals( execution.getExecutionId () ) )
+        {
+            String libsOut = librariesOutputDirectory.getAbsolutePath();
+            String out = objectsOutputDirectory.getAbsolutePath();
+
+            libsOut = libsOut + "/" + execution.getExecutionId ();
+            out = out + "/" + execution.getExecutionId ();
+
+            compileCommand.librariesOutputDirectory = new File( libsOut );
+            compileCommand.objectsOutputDirectory = new File( out );
+
+        }
+
+        getLog ().debug ( "Setting library out to " + compileCommand.librariesOutputDirectory.getAbsolutePath () );
+        getLog ().debug ( "Setting out to " + compileCommand.objectsOutputDirectory.getAbsolutePath () );
 
     }
 
     private class CompileCommand
     {
+        private File objectsOutputDirectory;
+        private File librariesOutputDirectory;
 
         private Set<Artifact> nativeLibraryDepedencies;
         private String[] resolvedArchitectures;
@@ -486,7 +519,7 @@ public class NdkBuildMojo extends AbstractMojo
 
             configureArchitectures( commands, compileCommand.getResolvedArchitectures () );
 
-            configureBuildDirectory( commands );
+            configureBuildDirectory( compileCommand, commands );
 
             configureMakefile( commands );
 
@@ -519,7 +552,7 @@ public class NdkBuildMojo extends AbstractMojo
                 for ( int i = 0; i < compileCommand.getResolvedArchitectures ().length; i++ )
                 {
                     String architecture = compileCommand.getResolvedArchitectures ()[ i ];
-                    processCompiledArtifacts ( architecture, makefileCaptureFile );
+                    processCompiledArtifacts ( compileCommand, architecture, makefileCaptureFile );
                 }
             }
             else
@@ -546,7 +579,10 @@ public class NdkBuildMojo extends AbstractMojo
         for ( int i = 0; i < resolvedArchitectures.length; i++ )
         {
             sb.append ( resolvedArchitectures[i] );
-            sb.append ( " " );
+            if ( ( i + 1 ) < resolvedArchitectures.length )
+            {
+                sb.append ( " " );
+            }
         }
 
         // We always for the APP_ABI onto the command line
@@ -555,7 +591,7 @@ public class NdkBuildMojo extends AbstractMojo
     }
 
 
-    private void configureBuildDirectory( final List<String> commands )
+    private void configureBuildDirectory( final CompileCommand compileCommand, final List<String> commands )
     {
         // Setup the build directory (defaults to the current directory) but may be different depending
         // on user configuration
@@ -563,8 +599,8 @@ public class NdkBuildMojo extends AbstractMojo
         commands.add( workingDirectory.getAbsolutePath() );
 
         // Next, configure the output directories
-        commands.add( "NDK_LIBS_OUT=" + librariesOutputDirectory.getAbsolutePath() );
-        commands.add( "NDK_OUT=" + objectsOutputDirectory.getAbsolutePath() );
+        commands.add( "NDK_LIBS_OUT=" + compileCommand.librariesOutputDirectory.getAbsolutePath () );
+        commands.add( "NDK_OUT=" + compileCommand.objectsOutputDirectory.getAbsolutePath ()  );
 
     }
 
@@ -659,13 +695,13 @@ public class NdkBuildMojo extends AbstractMojo
     /**
      * Attaches native libs to project.
      */
-    private void processCompiledArtifacts( String architecture, final File makefileCaptureFile ) throws IOException, MojoExecutionException
+    private void processCompiledArtifacts ( final CompileCommand compileCommand, String architecture, final File makefileCaptureFile ) throws IOException, MojoExecutionException
     {
         // Where the NDK build creates the libs.
-        final File nativeLibraryDirectory = new File( librariesOutputDirectory, architecture );
+        final File nativeLibraryDirectory = new File( compileCommand.librariesOutputDirectory, architecture );
 
         // Where the NDK build creates the object files - static files end up here
-        final File nativeObjDirectory = new File( new File( objectsOutputDirectory, "local" ), architecture );
+        final File nativeObjDirectory = new File( new File( compileCommand.objectsOutputDirectory, "local" ), architecture );
 
         final List<String> classifiers = new ArrayList<String>();
         if ( allowMultiArtifacts )
