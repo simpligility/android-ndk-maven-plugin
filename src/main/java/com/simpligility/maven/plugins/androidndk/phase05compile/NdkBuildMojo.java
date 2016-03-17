@@ -988,7 +988,7 @@ public class NdkBuildMojo extends AbstractMojo
                     final HeaderFilesDirective headerFilesDirective = new HeaderFilesDirective();
                     File includeDir = new File( project.getBasedir(), include );
                     headerFilesDirective.setDirectory( includeDir.getAbsolutePath() );
-                    headerFilesDirective.setIncludes( new String[]{ "**/*.h","**/*.hpp" } );
+                    headerFilesDirective.setIncludes( new String[]{ "**/*.h", "**/*.hpp" } );
                     finalHeaderFilesDirectives.add( headerFilesDirective );
                 }
             }
