@@ -419,8 +419,9 @@ public class NdkBuildMojo extends AbstractMojo
             libsOut = libsOut + "/" + execution.getExecutionId ();
             out = out + "/" + execution.getExecutionId ();
 
-            compileCommand.librariesOutputDirectory = new File( libsOut );
-            compileCommand.objectsOutputDirectory = new File( out );
+            // FIXME: Will this actually work - what happens if the execution is the single one & it has an ID?
+            // compileCommand.librariesOutputDirectory = new File( libsOut );
+            // compileCommand.objectsOutputDirectory = new File( out );
 
         }
 
@@ -745,7 +746,7 @@ public class NdkBuildMojo extends AbstractMojo
         // Process conditionally any of the headers to include into the header archive file
         if ( attachHeaderFiles )
         {
-            attachHeaderFiles( makefileCaptureFile, classifiers );
+            attachHeaderFiles( compileCommand, makefileCaptureFile, classifiers );
         }
 
 
@@ -969,7 +970,7 @@ public class NdkBuildMojo extends AbstractMojo
         return getAndroidNdk().getNdkBuildPath();
     }
 
-    private void attachHeaderFiles( File localCIncludesFile, final List<String> classifiers ) throws MojoExecutionException, IOException
+    private void attachHeaderFiles ( final CompileCommand compileCommand, final File localCIncludesFile, final List<String> classifiers ) throws MojoExecutionException, IOException
     {
 
         final List<HeaderFilesDirective> finalHeaderFilesDirectives = new ArrayList<HeaderFilesDirective>();
@@ -987,7 +988,7 @@ public class NdkBuildMojo extends AbstractMojo
                     final HeaderFilesDirective headerFilesDirective = new HeaderFilesDirective();
                     File includeDir = new File( project.getBasedir(), include );
                     headerFilesDirective.setDirectory( includeDir.getAbsolutePath() );
-                    headerFilesDirective.setIncludes( new String[]{ "**/*.h" } );
+                    headerFilesDirective.setIncludes( new String[]{ "**/*.h","**/*.hpp" } );
                     finalHeaderFilesDirectives.add( headerFilesDirective );
                 }
             }
@@ -1007,14 +1008,14 @@ public class NdkBuildMojo extends AbstractMojo
             if ( folder.exists() )
             {
                 e.setDirectory( folder.getAbsolutePath() );
-                e.setIncludes( new String[] { "**/*.h" } );
+                e.setIncludes( new String[] { "**/*.h", "**/*.hpp" } );
                 finalHeaderFilesDirectives.add( e );
             }
         }
-        createHeaderArchive( finalHeaderFilesDirectives, classifiers );
+        createHeaderArchive( compileCommand, finalHeaderFilesDirectives, classifiers );
     }
 
-    private void createHeaderArchive( List<HeaderFilesDirective> finalHeaderFilesDirectives, final List<String> classifiers ) throws MojoExecutionException
+    private void createHeaderArchive ( final CompileCommand compileCommand, final List<HeaderFilesDirective> finalHeaderFilesDirectives, final List<String> classifiers ) throws MojoExecutionException
     {
         try
         {
