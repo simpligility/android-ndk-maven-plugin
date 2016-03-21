@@ -353,29 +353,38 @@ public class NativeHelper
      */
     public static String[] getNdkArchitectures( final String ndkArchitectures, final String applicationMakefile, final File basedir ) throws MojoExecutionException
     {
-        String[] resolvedArchitectures = new String[]{ "armeabi" };
+        String[] resolvedArchitectures = null;
         // if there is a specified ndk architecture, return it
         if ( ndkArchitectures != null )
         {
             resolvedArchitectures = ndkArchitectures.split( " " );
         }
 
-        // if there is no application makefile specified, let's use the default one
-        String applicationMakefileToUse = applicationMakefile;
-        if ( applicationMakefileToUse == null )
+        if ( resolvedArchitectures == null )
         {
-            applicationMakefileToUse = "jni/Application.mk";
+            // if there is no application makefile specified, let's use the default one
+            String applicationMakefileToUse = applicationMakefile;
+            if ( applicationMakefileToUse == null )
+            {
+                applicationMakefileToUse = "jni/Application.mk";
+            }
+
+            // now let's see if the application file exists
+            File appMK = new File ( basedir, applicationMakefileToUse );
+            if ( appMK.exists () )
+            {
+                String[] foundNdkArchitectures = getAppAbi ( appMK );
+                if ( foundNdkArchitectures != null )
+                {
+                    resolvedArchitectures = foundNdkArchitectures;
+                }
+            }
         }
 
-        // now let's see if the application file exists
-        File appMK = new File( basedir, applicationMakefileToUse );
-        if ( appMK.exists() )
+        // If still not fond, we default it to armeabi
+        if ( resolvedArchitectures == null )
         {
-            String[] foundNdkArchitectures = getAppAbi( appMK );
-            if ( foundNdkArchitectures != null )
-            {
-                resolvedArchitectures = foundNdkArchitectures;
-            }
+            resolvedArchitectures = new String[] { "armeabi" };
         }
 
         String[] processedResolvedArchitectures = new String[resolvedArchitectures.length];
