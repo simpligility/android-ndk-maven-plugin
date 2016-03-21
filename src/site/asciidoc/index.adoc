@@ -9,7 +9,8 @@ The plugin includes numerous features with link:usage.html[some minimal setup fo
 == Required Setup
 
 * Android SDK r21.1 or later, latest is best supported
-* Android NDK ????, latest is best supported
+* Android NDK r9d, latest is best supported
+** There are "quirks" with older NDKs, if you find one, let us know
 * Java Development Kit 1.6 - 1.8 as supported by the Android SDK
 * Apache Maven 3.0.5+
 * Environment variables and PATH settings:
