@@ -12,7 +12,7 @@
   <name>Android NDK - Aggregator</name>
   <properties>
     <!-- at test time this will be overridden with snapshot version -->
-    <it-plugin.version>1.0.1-SNAPSHOT</it-plugin.version>
+    <it-plugin.version>1.1.1-SNAPSHOT</it-plugin.version>
   </properties>
 
   <modules>
