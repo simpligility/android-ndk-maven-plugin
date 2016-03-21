@@ -387,15 +387,19 @@ public class NativeHelper
             resolvedArchitectures = new String[] { "armeabi" };
         }
 
-        String[] processedResolvedArchitectures = new String[resolvedArchitectures.length];
+        List<String> processedResolvedArchitectures = new ArrayList<> (  );
 
         for ( int i = 0; i < resolvedArchitectures.length; i++ )
         {
-            processedResolvedArchitectures[ i ] = resolvedArchitectures[ i ].trim ();
+            final String resolvedArchitecture = resolvedArchitectures[ i ].trim ();
+            if ( resolvedArchitecture.length () > 0 )
+            {
+                processedResolvedArchitectures.add( resolvedArchitecture );
+            }
         }
 
         // return a default ndk architecture
-        return processedResolvedArchitectures;
+        return processedResolvedArchitectures.toArray ( new String[ processedResolvedArchitectures.size () ] );
     }
 
     /**
