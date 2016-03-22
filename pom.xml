@@ -254,38 +254,6 @@
           <artifactId>plexus-component-metadata</artifactId>
           <version>1.6</version>
         </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-scm-publish-plugin</artifactId>
-          <configuration>
-            <pubScmUrl>${project.scm.developerConnection}</pubScmUrl>
-            <scmBranch>gh-pages</scmBranch>
-            <content>${project.reporting.outputDirectory}</content>
-          </configuration>
-          <executions>
-            <execution>
-              <id>scm-publish</id>
-              <phase>site-deploy</phase><!-- deploy site with maven-scm-publish-plugin -->
-              <goals>
-                <goal>publish-scm</goal>
-              </goals>
-            </execution>
-         </executions>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-site-plugin</artifactId>
-          <configuration>
-            <skipDeploy>true</skipDeploy><!-- don't deploy site with maven-site-plugin -->
-          </configuration>
-          <dependencies>
-            <dependency>
-              <groupId>org.asciidoctor</groupId>
-              <artifactId>asciidoctor-maven-plugin</artifactId>
-              <version>1.5.3</version>
-            </dependency>
-          </dependencies>
-        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -350,6 +318,40 @@
           <scmVersionType>branch</scmVersionType>
           <scmVersion>${scm.branch}</scmVersion>
         </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-scm-publish-plugin</artifactId>
+        <configuration>
+          <pubScmUrl>${project.scm.developerConnection}</pubScmUrl>
+          <scmBranch>gh-pages</scmBranch>
+          <content>${project.reporting.outputDirectory}</content>
+        </configuration>
+        <executions>
+          <execution>
+            <id>scm-publish</id>
+            <phase>site-deploy</phase><!-- deploy site with maven-scm-publish-plugin -->
+            <goals>
+              <goal>publish-scm</goal>
+            </goals>
+          </execution>
+       </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <configuration>
+          <skipDeploy>true</skipDeploy><!-- don't deploy site with maven-site-plugin -->
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.asciidoctor</groupId>
+            <artifactId>asciidoctor-maven-plugin</artifactId>
+            <version>1.5.3</version>
+          </dependency>
+        </dependencies>
       </plugin>
 
       <plugin>
