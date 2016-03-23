@@ -3,14 +3,22 @@
 Detailed changes can be seen in the 
 https://github.com/simpligility/android-ndk-maven-plugin/commits/master[git commit log]. 
 
-== 1.1.1 or higher - upcoming
+== 1.1.2 or higher - upcoming
+
+Your changes and improvements could be here.. 
+
+== 1.1.1 - released 2016-03-22
 
 * Cleanup the various toolchain mappings
 ** Contributed by https://github.com/johanlindquist
 * Fixed issue whereby NDK architecture names are used even if they contain spaces
 ** Contributed by https://github.com/johanlindquist
 
+Release performed by Manfred Moser http://simpligility.com
+
 == 1.1.0 - released 2016-02-12
+
+ http://www.simpligility.com/2016/02/android-ndk-maven-plugin-1-1-0-released/[Release announcement]
 
 * Fixed makefile parameter. build output directly into target folder instead of moving files
 ** see https://github.com/simpligility/android-ndk-maven-plugin/pull/12
