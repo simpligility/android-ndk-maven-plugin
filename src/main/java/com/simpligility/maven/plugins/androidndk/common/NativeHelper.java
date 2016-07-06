@@ -221,6 +221,14 @@ public class NativeHelper
 
     public static void validateNDKVersion( File ndkHomeDir ) throws MojoExecutionException
     {
+        final File ndkSourcePropertiesFile = new File( ndkHomeDir, "source.properties" );
+
+        if ( ndkSourcePropertiesFile.exists() )
+        {
+            // As of 11 this file is a sign of a good release
+            return;
+        }
+
         final File ndkVersionFile = new File( ndkHomeDir, "RELEASE.TXT" );
 
         if ( !ndkVersionFile.exists() )
