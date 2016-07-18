@@ -5,7 +5,7 @@ https://github.com/simpligility/android-ndk-maven-plugin/commits/master[git comm
 
 == 1.1.2 or higher - upcoming
 
-Your changes and improvements could be here.. 
+* Fix to support Android NDK r11x
 
 == 1.1.1 - released 2016-03-22
 
