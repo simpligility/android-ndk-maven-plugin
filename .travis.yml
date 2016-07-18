@@ -31,7 +31,7 @@ before_script:
 
   # https://dl.google.com/android/repository/android-ndk-r11c-linux-x86_64.zip
   - wget https://dl.google.com/android/repository/${FILE}
-  - unzip ${FILE}
+  - unzip -qq ${FILE}
   - export ANDROID_NDK_HOME=$PWD/android-ndk-r11c
 
   # Make sure the emulator is running.
