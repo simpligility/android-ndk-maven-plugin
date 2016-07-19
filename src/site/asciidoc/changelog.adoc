@@ -3,9 +3,13 @@
 Detailed changes can be seen in the 
 https://github.com/simpligility/android-ndk-maven-plugin/commits/master[git commit log]. 
 
+== 1.1.3 or higher - upcoming
+
+Your changes could be here.. 
+
 == 1.1.2 - release 2016-07-18
 
- http://www.simpligility.com/2016/07/android-ndk-mave…n-1-1-2-released/[Release announcement]
+http://www.simpligility.com/2016/07/android-ndk-mave…n-1-1-2-released/[Release announcement]
  
 * Fix to support Android NDK r11x
 ** Contributed by https://github.com/johanlindquist
